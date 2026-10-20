@@ -69,6 +69,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import { useToast } from "../toast/useToast";
 
 type IconName = ComponentProps<typeof Ionicons>["name"];
 
@@ -850,6 +851,7 @@ function Hero() {
   const { goTab } = useApp();
   const { s } = useStyles();
   const bob = useSharedValue(0);
+  const toast = useToast();
   useEffect(() => {
     bob.value = withRepeat(
       withTiming(1, { duration: 2200, easing: Easing.inOut(Easing.sin) }),
@@ -882,7 +884,12 @@ function Hero() {
           <Text style={s.heroDescription}>
             Les ressources de ton campus, réunies au même endroit.
           </Text>
-          <Pressy onPress={() => goTab("Explorer")} style={s.heroButton}>
+          <Pressy
+            onPress={() =>
+              toast.error("Here are the resources for your campus")
+            }
+            style={s.heroButton}
+          >
             <Text style={s.heroButtonText}>Explorer les ressources</Text>
             <Ionicons name="arrow-forward" size={17} color={LIGHT.greenDark} />
           </Pressy>
