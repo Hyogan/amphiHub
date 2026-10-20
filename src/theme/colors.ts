@@ -1,0 +1,123 @@
+export const lightColors = {
+  brand: {
+    primary: "#6A48C2",
+    primaryPressed: "#5636A8",
+    primarySoft: "#EFEAFB",
+    navy: "#0F1A3A",
+    navySoft: "#1B2850",
+  },
+  background: {
+    primary: "#F7F8FC",
+    secondary: "#FFFFFF",
+    tertiary: "#FFFFFF",
+    elevated: "#FFFFFF",
+  },
+  text: {
+    primary: "#0F1A3A",
+    secondary: "#4A5578",
+    tertiary: "#6B7494",
+    disabled: "#A3A9BF",
+    inverse: "#FFFFFF",
+    link: "#6A48C2",
+  },
+  border: {
+    subtle: "#E6E8F0",
+    default: "#D3D7E4",
+    strong: "#AEB4C8",
+    focus: "#6A48C2",
+  },
+  status: {
+    success: "#1F8A5B",
+    successSoft: "#E3F4EC",
+    warning: "#B7791F",
+    warningSoft: "#FBF0DC",
+    error: "#C53030",
+    errorSoft: "#FBE6E6",
+    info: "#2B6CB0",
+    infoSoft: "#E2EEF9",
+    neutral: "#5B6482",
+    neutralSoft: "#ECEEF4",
+  },
+  interactive: {
+    primary: "#6A48C2",
+    primaryPressed: "#5636A8",
+    secondary: "#EFEAFB",
+    secondaryPressed: "#E2DAF6",
+    disabled: "#D9DCE8",
+  },
+  icon: {
+    primary: "#0F1A3A",
+    secondary: "#4A5578",
+    muted: "#8A91AD",
+    inverse: "#FFFFFF",
+    accent: "#6A48C2",
+  },
+  overlay: {
+    light: "rgba(15,26,58,0.08)",
+    medium: "rgba(15,26,58,0.4)",
+    dark: "rgba(15,26,58,0.7)",
+  },
+};
+
+export type Colors = typeof lightColors;
+
+export const darkColors: Colors = {
+  brand: {
+    primary: "#6A48C2",
+    primaryPressed: "#7C5CD6",
+    primarySoft: "#241C4A",
+    navy: "#0F1A3A",
+    navySoft: "#1B2850",
+  },
+  background: {
+    primary: "#0B1226",
+    secondary: "#121B36",
+    tertiary: "#18223F",
+    elevated: "#1E2950",
+  },
+  text: {
+    primary: "#EEF0F8",
+    secondary: "#B4BAD3",
+    tertiary: "#8A91AD",
+    disabled: "#5A6283",
+    inverse: "#0F1A3A",
+    link: "#A78BFA",
+  },
+  border: {
+    subtle: "#1F2A4A",
+    default: "#2B3860",
+    strong: "#46557F",
+    focus: "#A78BFA",
+  },
+  status: {
+    success: "#4CC38A",
+    successSoft: "#14301F",
+    warning: "#E3A94B",
+    warningSoft: "#33270F",
+    error: "#F27878",
+    errorSoft: "#3A1717",
+    info: "#6AAEE8",
+    infoSoft: "#14263A",
+    neutral: "#9BA3C0",
+    neutralSoft: "#1E2745",
+  },
+  interactive: {
+    primary: "#6A48C2",
+    primaryPressed: "#7C5CD6",
+    secondary: "#241C4A",
+    secondaryPressed: "#2E2460",
+    disabled: "#2B3352",
+  },
+  icon: {
+    primary: "#EEF0F8",
+    secondary: "#B4BAD3",
+    muted: "#7A829F",
+    inverse: "#0F1A3A",
+    accent: "#A78BFA",
+  },
+  overlay: {
+    light: "rgba(0,0,0,0.2)",
+    medium: "rgba(0,0,0,0.5)",
+    dark: "rgba(0,0,0,0.75)",
+  },
+};
