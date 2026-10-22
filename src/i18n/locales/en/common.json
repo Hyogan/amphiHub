@@ -1,6 +1,11 @@
 {
   "app": { "name": "amphiHub", "tagline": "Study better. Go further." },
-  "tabs": { "home": "Home", "explore": "Explore", "saved": "Saved", "profile": "Profile" },
+  "tabs": {
+    "home": "Home",
+    "explore": "Explore",
+    "saved": "Saved",
+    "profile": "Profile"
+  },
   "actions": {
     "cancel": "Cancel",
     "continue": "Continue",
@@ -10,7 +15,16 @@
     "save": "Save",
     "back": "Back"
   },
-  "state": { "loading": "Loading…", "comingSoon": "This screen is coming soon." },
+  "search": {
+    "placeholder": "A course, a code, a year",
+    "filters": "Filters",
+    "clear": "Clear",
+    "resultsFor": "Results for “{{query}}”"
+  },
+  "state": {
+    "loading": "Loading…",
+    "comingSoon": "This screen is coming soon."
+  },
   "celebration": { "title": "Well done!" },
   "error": {
     "generic": "Something went wrong. Try again in a moment.",

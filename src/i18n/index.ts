@@ -4,8 +4,10 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import enCommon from "./locales/en/common.json";
+import enOnboarding from "./locales/en/onboarding.json";
 import enVerification from "./locales/en/verification.json";
 import frCommon from "./locales/fr/common.json";
+import frOnboarding from "./locales/fr/onboarding.json";
 import frVerification from "./locales/fr/verification.json";
 
 export type Language = "fr" | "en";
@@ -26,13 +28,21 @@ function initialLanguage(): Language {
 // If TypeScript says initAsync does not exist, your i18next is older: use initImmediate: false instead.
 i18n.use(initReactI18next).init({
   resources: {
-    fr: { common: frCommon, verification: frVerification },
-    en: { common: enCommon, verification: enVerification },
+    fr: {
+      common: frCommon,
+      onboarding: frOnboarding,
+      verification: frVerification,
+    },
+    en: {
+      common: enCommon,
+      onboarding: enOnboarding,
+      verification: enVerification,
+    },
   },
   lng: initialLanguage(),
   fallbackLng: "fr",
   defaultNS: "common",
-  ns: ["common", "verification"],
+  ns: ["common", "onboarding", "verification"],
   interpolation: { escapeValue: false },
   initAsync: false,
   react: { useSuspense: false },

@@ -3,6 +3,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import celebrationReducer from "@/shared/celebration/celebrationSlice";
 import toastReducer from "@/shared/toast/toastSlice";
 
+import dockReducer from "./dockSlice";
+import preferencesReducer from "./preferencesSlice";
 import sessionReducer from "./sessionSlice";
 
 // Only genuine client state lives here. Server data stays in the TanStack Query cache.
@@ -11,6 +13,8 @@ import sessionReducer from "./sessionSlice";
 export const store = configureStore({
   reducer: {
     session: sessionReducer,
+    preferences: preferencesReducer,
+    dock: dockReducer,
     toast: toastReducer,
     celebration: celebrationReducer,
   },
