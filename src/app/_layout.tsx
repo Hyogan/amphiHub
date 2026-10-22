@@ -12,6 +12,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 
 import { AppProviders } from "@/core/providers/AppProviders";
+import { CelebrationManager } from "@/shared/celebration/CelebrationManager";
 import { ToastManager } from "@/shared/toast/ToastManager";
 
 SplashScreen.preventAutoHideAsync();
@@ -37,6 +38,7 @@ export default function RootLayout() {
       <StatusBar style="auto" />
       <Stack screenOptions={{ headerShown: false }} />
       <ToastManager />
+      <CelebrationManager />
     </AppProviders>
   );
 }

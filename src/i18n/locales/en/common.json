@@ -1,0 +1,19 @@
+{
+  "app": { "name": "amphiHub", "tagline": "Study better. Go further." },
+  "tabs": { "home": "Home", "explore": "Explore", "saved": "Saved", "profile": "Profile" },
+  "actions": {
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "start": "Get started",
+    "retry": "Try again",
+    "close": "Close",
+    "save": "Save",
+    "back": "Back"
+  },
+  "state": { "loading": "Loading…", "comingSoon": "This screen is coming soon." },
+  "celebration": { "title": "Well done!" },
+  "error": {
+    "generic": "Something went wrong. Try again in a moment.",
+    "network": "No connection. Check your network."
+  }
+}

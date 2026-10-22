@@ -1,0 +1,8 @@
+{
+  "community": { "label": "Non vérifié", "description": "Ajouté par un étudiant, pas encore relu." },
+  "metadata": { "label": "Infos relues", "description": "Un modérateur a contrôlé l’UE, l’année et le type." },
+  "source": { "label": "Source confirmée", "description": "La provenance du fichier a été confirmée." },
+  "official": { "label": "Source officielle", "description": "Origine officielle prouvée." },
+  "correction": { "label": "Correction relue", "description": "Correction relue par une personne identifiée." },
+  "ai": { "label": "Généré par IA", "description": "Produit avec une IA, à vérifier." }
+}

@@ -1,0 +1,8 @@
+{
+  "community": { "label": "Unverified", "description": "Added by a student, not yet reviewed." },
+  "metadata": { "label": "Details checked", "description": "A moderator checked the course, year and type." },
+  "source": { "label": "Source confirmed", "description": "The origin of the file was confirmed." },
+  "official": { "label": "Official source", "description": "Official origin proven." },
+  "correction": { "label": "Correction reviewed", "description": "Reviewed by an identified person." },
+  "ai": { "label": "AI-generated", "description": "Produced with AI, check it." }
+}

@@ -1,0 +1,19 @@
+{
+  "app": { "name": "amphiHub", "tagline": "Révise mieux. Va plus loin." },
+  "tabs": { "home": "Accueil", "explore": "Explorer", "saved": "Enregistrés", "profile": "Profil" },
+  "actions": {
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "start": "Commencer",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "back": "Retour"
+  },
+  "state": { "loading": "Chargement…", "comingSoon": "Cet écran arrive bientôt." },
+  "celebration": { "title": "Bravo !" },
+  "error": {
+    "generic": "Une erreur est survenue. Réessaie dans un instant.",
+    "network": "Pas de connexion. Vérifie ton réseau."
+  }
+}
