@@ -8,14 +8,13 @@
     "scheme": "amphihub",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/expo.icon"
+      "icon": "./assets/images/icon.png"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/images/adaptive-foreground.png",
+        "monochromeImage": "./assets/images/adaptive-monochrome.png",
+        "backgroundColor": "#145A46"
       },
       "predictiveBackGestureEnabled": false
     },
@@ -28,9 +27,13 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 76
+          "image": "./src/assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "backgroundColor": "#145A46",
+          "dark": {
+            "image": "./src/assets/images/splash-icon.png",
+            "backgroundColor": "#06160F"
+          }
         }
       ],
       "expo-sqlite",
