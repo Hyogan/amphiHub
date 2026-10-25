@@ -3,11 +3,15 @@ import "expo-sqlite/localStorage/install";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+import enAuth from "./locales/en/auth.json";
 import enCommon from "./locales/en/common.json";
 import enOnboarding from "./locales/en/onboarding.json";
+import enProfile from "./locales/en/profile.json";
 import enVerification from "./locales/en/verification.json";
+import frAuth from "./locales/fr/auth.json";
 import frCommon from "./locales/fr/common.json";
 import frOnboarding from "./locales/fr/onboarding.json";
+import frProfile from "./locales/fr/profile.json";
 import frVerification from "./locales/fr/verification.json";
 
 export type Language = "fr" | "en";
@@ -32,17 +36,21 @@ i18n.use(initReactI18next).init({
       common: frCommon,
       onboarding: frOnboarding,
       verification: frVerification,
+      auth: frAuth,
+      profile: frProfile,
     },
     en: {
       common: enCommon,
       onboarding: enOnboarding,
       verification: enVerification,
+      auth: enAuth,
+      profile: enProfile,
     },
   },
   lng: initialLanguage(),
   fallbackLng: "fr",
   defaultNS: "common",
-  ns: ["common", "onboarding", "verification"],
+  ns: ["common", "onboarding", "verification", "auth", "profile"],
   interpolation: { escapeValue: false },
   initAsync: false,
   react: { useSuspense: false },

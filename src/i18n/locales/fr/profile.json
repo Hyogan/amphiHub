@@ -1,0 +1,14 @@
+{
+  "guest": {
+    "title": "Tu navigues sans compte",
+    "body": "Crée un compte pour télécharger, enregistrer et ajouter des documents."
+  },
+  "signIn": "Se connecter",
+  "signUp": "Créer un compte",
+  "signedInAs": "Connecté en tant que",
+  "signOut": "Se déconnecter",
+  "appearance": "Apparence",
+  "language": "Langue",
+  "theme": { "system": "Automatique", "light": "Clair", "dark": "Sombre" },
+  "academicSoon": "Ton profil académique arrive bientôt."
+}

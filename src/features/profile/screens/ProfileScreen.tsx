@@ -1,145 +1,123 @@
-import { useRef } from "react";
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import Animated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useSignOutMutation } from "@/features/auth/hooks/useAuthMutations";
+import { DevPanel } from "@/features/dev/DevPanel";
 import { setLanguage, type Language } from "@/i18n";
-import { useCelebrate } from "@/shared/celebration/useCelebrate";
-import {
-  AppSheet,
-  SheetTextInput,
-  type SheetHandle,
-} from "@/shared/components/AppSheet";
 import { Button } from "@/shared/components/Button";
-import { Stamp, type VerificationKind } from "@/shared/components/Stamp";
 import { Tag } from "@/shared/components/Tag";
 import { useTheme, useThemeColors } from "@/shared/hooks/theme";
-import { useShake } from "@/shared/motion/hooks";
-import { useToast } from "@/shared/toast/useToast";
+import { useAppSelector } from "@/store/hooks";
 import type { ThemeMode } from "@/theme/ThemeProvider";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
-const STAMPS: VerificationKind[] = [
-  "community",
-  "metadata",
-  "source",
-  "official",
-  "correction",
-  "ai",
-];
 const MODES: ThemeMode[] = ["system", "light", "dark"];
 
-/**
- * Temporary: the real profile arrives in M2. The block below is a developer panel that proves the
- * shared pieces work on a device (language, theme, toast, shake, celebration, sheet, stamps).
- * It is deliberately not translated and must be removed before release.
- */
 export function ProfileScreen() {
   const colors = useThemeColors();
+  const router = useRouter();
   const { mode, setMode } = useTheme();
-  const { t, i18n } = useTranslation();
-  const toast = useToast();
-  const celebrate = useCelebrate();
-  const shake = useShake();
-  const sheet = useRef<SheetHandle>(null);
+  const { t, i18n } = useTranslation("profile");
+  const { t: tc } = useTranslation();
+  const session = useAppSelector((state) => state.session);
+  const signOut = useSignOutMutation();
   const styles = createStyles(colors);
+
+  const signedIn = session.status === "signedIn";
+  const initials = (session.email ?? "?").slice(0, 2).toUpperCase();
 
   return (
     <SafeAreaView style={styles.root} edges={["top"]}>
       <ScrollView
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.title}>{t("tabs.profile")}</Text>
-        <Text style={styles.body}>{t("state.comingSoon")}</Text>
+        <Text style={styles.title}>{tc("tabs.profile")}</Text>
 
-        <Text style={styles.heading}>Dev: langue</Text>
+        {signedIn ? (
+          <View style={styles.card}>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{initials}</Text>
+            </View>
+            <View style={styles.flex}>
+              <Text style={styles.caption}>{t("signedInAs")}</Text>
+              <Text style={styles.email} numberOfLines={1}>
+                {session.email}
+              </Text>
+            </View>
+          </View>
+        ) : (
+          <View style={styles.guest}>
+            <Ionicons
+              name="person-circle-outline"
+              size={44}
+              color={colors.brand.primary}
+            />
+            <Text style={styles.guestTitle}>{t("guest.title")}</Text>
+            <Text style={styles.body}>{t("guest.body")}</Text>
+            <Button
+              label={t("signUp")}
+              onPress={() => router.push("/(auth)/signup")}
+            />
+            <Button
+              label={t("signIn")}
+              kind="outline"
+              onPress={() => router.push("/(auth)/login")}
+            />
+          </View>
+        )}
+
+        {signedIn ? <Text style={styles.body}>{t("academicSoon")}</Text> : null}
+
+        <Text style={styles.heading}>{t("appearance")}</Text>
+        <Text style={styles.caption}>{t("language")}</Text>
         <View style={styles.row}>
           {(["fr", "en"] as Language[]).map((language) => (
             <Tag
               key={language}
-              label={language.toUpperCase()}
+              label={language === "fr" ? "Français" : "English"}
               selected={i18n.language === language}
               onPress={() => setLanguage(language)}
             />
           ))}
         </View>
-
-        <Text style={styles.heading}>Dev: thème</Text>
         <View style={styles.row}>
           {MODES.map((m) => (
             <Tag
               key={m}
-              label={m}
+              label={t(`theme.${m}`)}
               selected={mode === m}
               onPress={() => setMode(m)}
             />
           ))}
         </View>
 
-        <Text style={styles.heading}>Dev: retours</Text>
-        <Button
-          label="Toast de succès"
-          onPress={() =>
-            toast.success("Document enregistré dans ta bibliothèque.")
-          }
-        />
-        <Button
-          label="Toast d’erreur"
-          kind="outline"
-          onPress={() => toast.error("Téléchargement interrompu.")}
-        />
-        <Button
-          label="Fêter une réussite"
-          kind="accent"
-          icon="trophy-outline"
-          onPress={() => celebrate("Objectif atteint")}
-        />
-        <Animated.View style={shake.style}>
-          <View style={styles.shakeBox}>
-            <Text style={styles.body}>Cette zone se secoue.</Text>
-          </View>
-        </Animated.View>
-        <Button label="Secouer" kind="text" onPress={shake.shake} />
+        {signedIn ? (
+          <Button
+            label={t("signOut")}
+            kind="outline"
+            icon="log-out-outline"
+            loading={signOut.isPending}
+            onPress={() => signOut.mutate()}
+          />
+        ) : null}
 
-        <Text style={styles.heading}>Dev: feuille</Text>
-        <Button
-          label="Ouvrir la feuille"
-          kind="outline"
-          icon="layers-outline"
-          onPress={() => sheet.current?.open()}
-        />
-
-        <Text style={styles.heading}>Dev: labels</Text>
-        {STAMPS.map((kind) => (
-          <Stamp key={kind} kind={kind} />
-        ))}
+        {__DEV__ ? <DevPanel /> : null}
       </ScrollView>
-
-      <AppSheet ref={sheet}>
-        <Text style={styles.heading}>Feuille de test</Text>
-        <Text style={styles.body}>
-          Glisse vers le bas pour la réduire ou la fermer. Le champ ci-dessous
-          teste le clavier.
-        </Text>
-        <SheetTextInput
-          placeholder="Écris quelque chose"
-          placeholderTextColor={colors.text.secondary}
-          style={styles.input}
-          cursorColor={colors.brand.primary}
-        />
-        <Button label="Fermer" onPress={() => sheet.current?.close()} />
-      </AppSheet>
     </SafeAreaView>
   );
 }
 
 const createStyles = (colors: Colors) =>
   StyleSheet.create({
+    flex: { flex: 1 },
     root: { flex: 1, backgroundColor: colors.background.primary },
-    content: { padding: 20, gap: 12 },
+    content: { padding: 20, gap: 14, paddingBottom: 32 },
     title: {
       fontFamily: fonts.extrabold,
       fontSize: 26,
@@ -153,27 +131,57 @@ const createStyles = (colors: Colors) =>
       lineHeight: 22,
       color: colors.text.secondary,
     },
+    caption: {
+      fontFamily: fonts.semibold,
+      fontSize: 13,
+      color: colors.text.secondary,
+    },
     heading: {
       fontFamily: fonts.extrabold,
-      fontSize: 17,
+      fontSize: 19,
       color: colors.text.primary,
       marginTop: 12,
     },
     row: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-    shakeBox: {
+    card: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 14,
       padding: 16,
-      borderRadius: 14,
-      backgroundColor: colors.status.errorSoft,
-    },
-    input: {
-      height: 52,
-      paddingHorizontal: 14,
-      borderRadius: 14,
-      borderWidth: 1.5,
-      borderColor: colors.border.default,
+      borderRadius: 20,
       backgroundColor: colors.background.secondary,
-      fontFamily: fonts.semibold,
+      borderWidth: 1,
+      borderColor: colors.border.subtle,
+    },
+    avatar: {
+      width: 56,
+      height: 56,
+      borderRadius: 18,
+      backgroundColor: colors.brand.primarySoft,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    avatarText: {
+      fontFamily: fonts.black,
+      fontSize: 20,
+      color: colors.brand.primary,
+    },
+    email: {
+      fontFamily: fonts.extrabold,
       fontSize: 16,
+      color: colors.text.primary,
+    },
+    guest: {
+      gap: 12,
+      padding: 20,
+      borderRadius: 22,
+      backgroundColor: colors.background.secondary,
+      borderWidth: 1,
+      borderColor: colors.border.subtle,
+    },
+    guestTitle: {
+      fontFamily: fonts.extrabold,
+      fontSize: 20,
       color: colors.text.primary,
     },
   });

@@ -1,0 +1,14 @@
+{
+  "guest": {
+    "title": "You’re browsing without an account",
+    "body": "Create an account to download, save and add documents."
+  },
+  "signIn": "Sign in",
+  "signUp": "Create an account",
+  "signedInAs": "Signed in as",
+  "signOut": "Sign out",
+  "appearance": "Appearance",
+  "language": "Language",
+  "theme": { "system": "Automatic", "light": "Light", "dark": "Dark" },
+  "academicSoon": "Your academic profile is coming soon."
+}
