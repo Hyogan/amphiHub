@@ -16,7 +16,8 @@
         "monochromeImage": "./assets/images/adaptive-monochrome.png",
         "backgroundColor": "#145A46"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.arsenenelson.amphiHub"
     },
     "web": {
       "output": "static",
@@ -27,11 +28,11 @@
       [
         "expo-splash-screen",
         {
-          "image": "./src/assets/images/splash-icon.png",
+          "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "backgroundColor": "#145A46",
           "dark": {
-            "image": "./src/assets/images/splash-icon.png",
+            "image": "./assets/images/splash-icon.png",
             "backgroundColor": "#06160F"
           }
         }
