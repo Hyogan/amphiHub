@@ -10,5 +10,30 @@
   "appearance": "Apparence",
   "language": "Langue",
   "theme": { "system": "Automatique", "light": "Clair", "dark": "Sombre" },
-  "academicSoon": "Ton profil académique arrive bientôt."
+  "academic": {
+    "title": "Mon profil académique",
+    "hint": "Choisis ton université et ta filière pour voir en premier les sujets qui te correspondent.",
+    "university": "Université",
+    "program": "Filière",
+    "level": "Niveau",
+    "semester": "Semestre",
+    "pickUniversity": "Choisir une université",
+    "pickProgram": "Choisir une filière",
+    "pickLevel": "Choisir un niveau",
+    "pickSemester": "Choisir un semestre (facultatif)",
+    "programFirst": "Choisis d’abord une université",
+    "levelFirst": "Choisis d’abord une filière",
+    "semesterValue": "Semestre {{n}}",
+    "noSemester": "Ne pas préciser",
+    "save": "Enregistrer",
+    "saved": "Profil académique enregistré.",
+    "complete": "Ton profil académique est complet",
+    "completeStatus": "Profil complet",
+    "incompleteStatus": "Profil à compléter",
+    "loadError": "Impossible de charger ton profil.",
+    "listError": "Impossible de charger la liste.",
+    "emptyUniversities": "Aucune université pour l’instant.",
+    "emptyPrograms": "Aucune filière pour cette université pour l’instant.",
+    "emptyLevels": "Aucun niveau trouvé."
+  }
 }

@@ -10,5 +10,30 @@
   "appearance": "Appearance",
   "language": "Language",
   "theme": { "system": "Automatic", "light": "Light", "dark": "Dark" },
-  "academicSoon": "Your academic profile is coming soon."
+  "academic": {
+    "title": "My academic profile",
+    "hint": "Choose your university and program to see the papers that match you first.",
+    "university": "University",
+    "program": "Program",
+    "level": "Level",
+    "semester": "Semester",
+    "pickUniversity": "Choose a university",
+    "pickProgram": "Choose a program",
+    "pickLevel": "Choose a level",
+    "pickSemester": "Choose a semester (optional)",
+    "programFirst": "Choose a university first",
+    "levelFirst": "Choose a program first",
+    "semesterValue": "Semester {{n}}",
+    "noSemester": "Don’t specify",
+    "save": "Save",
+    "saved": "Academic profile saved.",
+    "complete": "Your academic profile is complete",
+    "completeStatus": "Profile complete",
+    "incompleteStatus": "Profile to complete",
+    "loadError": "Couldn’t load your profile.",
+    "listError": "Couldn’t load the list.",
+    "emptyUniversities": "No university yet.",
+    "emptyPrograms": "No program for this university yet.",
+    "emptyLevels": "No level found."
+  }
 }

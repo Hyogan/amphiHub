@@ -15,6 +15,8 @@ import type { ThemeMode } from "@/theme/ThemeProvider";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
+import { AcademicProfileSection } from "../components/AcademicProfileSection";
+
 const MODES: ThemeMode[] = ["system", "light", "dark"];
 
 export function ProfileScreen() {
@@ -72,7 +74,9 @@ export function ProfileScreen() {
           </View>
         )}
 
-        {signedIn ? <Text style={styles.body}>{t("academicSoon")}</Text> : null}
+        {signedIn && session.userId ? (
+          <AcademicProfileSection userId={session.userId} />
+        ) : null}
 
         <Text style={styles.heading}>{t("appearance")}</Text>
         <Text style={styles.caption}>{t("language")}</Text>
