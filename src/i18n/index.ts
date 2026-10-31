@@ -7,13 +7,14 @@ import enAuth from "./locales/en/auth.json";
 import enCommon from "./locales/en/common.json";
 import enOnboarding from "./locales/en/onboarding.json";
 import enProfile from "./locales/en/profile.json";
+import enResources from "./locales/en/resources.json";
 import enVerification from "./locales/en/verification.json";
 import frAuth from "./locales/fr/auth.json";
 import frCommon from "./locales/fr/common.json";
 import frOnboarding from "./locales/fr/onboarding.json";
 import frProfile from "./locales/fr/profile.json";
+import frResources from "./locales/fr/resources.json";
 import frVerification from "./locales/fr/verification.json";
-
 export type Language = "fr" | "en";
 
 const STORAGE_KEY = "amphihub.language";
@@ -38,6 +39,7 @@ i18n.use(initReactI18next).init({
       verification: frVerification,
       auth: frAuth,
       profile: frProfile,
+      resources: frResources,
     },
     en: {
       common: enCommon,
@@ -45,12 +47,13 @@ i18n.use(initReactI18next).init({
       verification: enVerification,
       auth: enAuth,
       profile: enProfile,
+      resources: enResources,
     },
   },
   lng: initialLanguage(),
   fallbackLng: "fr",
   defaultNS: "common",
-  ns: ["common", "onboarding", "verification", "auth", "profile"],
+  ns: ["common", "onboarding", "verification", "auth", "profile", "resources"],
   interpolation: { escapeValue: false },
   initAsync: false,
   react: { useSuspense: false },

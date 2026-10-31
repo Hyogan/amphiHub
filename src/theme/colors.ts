@@ -61,6 +61,13 @@ export const lightColors = {
     inverse: "#FFFFFF",
     accent: "#145A46",
   },
+  paper: {
+    surface: "#FFFFFF",
+    ink: "#0B2B20",
+    inkMuted: "#58695F",
+    line: "#E6E7DC",
+  },
+
   overlay: {
     light: "rgba(10,43,32,0.08)",
     medium: "rgba(10,43,32,0.4)",
@@ -138,6 +145,13 @@ export const darkColors: Colors = {
     inverse: "#06231A",
     accent: "#4CC49A",
   },
+  paper: {
+    surface: "#FFFFFF",
+    ink: "#0B2B20",
+    inkMuted: "#58695F",
+    line: "#E6E7DC",
+  },
+
   overlay: {
     light: "rgba(0,0,0,0.2)",
     medium: "rgba(0,0,0,0.5)",

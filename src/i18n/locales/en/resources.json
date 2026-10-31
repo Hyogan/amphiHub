@@ -1,0 +1,53 @@
+{
+  "explore": {
+    "title": "Explore",
+    "all": "All",
+    "filters": "Filters",
+    "level": "Level",
+    "year": "Academic year",
+    "onlyCorrected": "With correction only",
+    "onlyCorrectedHint": "Hides papers without a correction",
+    "mine": "My university only",
+    "reset": "Reset",
+    "apply": "Show results",
+    "resultCount_one": "{{count}} result",
+    "resultCount_other": "{{count}} results",
+    "resultsFor": "for “{{query}}”",
+    "loadError": "Couldn’t load the results.",
+    "emptyTitle": "No paper found",
+    "emptyBody": "Check the spelling or widen the filters. You can also request this document.",
+    "request": "Request this document",
+    "requested": "Request sent. Thank you, we’re on it.",
+    "clear": "Clear the search",
+    "corrected": "Corrected"
+  },
+  "session": {
+    "normal": "Regular session",
+    "retake": "Retake",
+    "other": "Other session"
+  },
+  "language": {
+    "fr": "French",
+    "en": "English"
+  },
+  "detail": {
+    "university": "University",
+    "course": "Course",
+    "year": "Year",
+    "yearUnknown": "Year unknown",
+    "session": "Session",
+    "language": "Language",
+    "file": "File",
+    "fileValue": "PDF, {{size}}, {{pages}} pages",
+    "fileValueNoPages": "PDF, {{size}}",
+    "noFile": "File not available yet",
+    "source": "Source",
+    "sourceCommunity": "Declared by the contributor",
+    "sourceOfficial": "Official source",
+    "notice": "Review checks the document’s details, not whether the answers are right. Always compare with your course.",
+    "corrections": "Corrections",
+    "correctionOf": "Correction of the paper",
+    "notFound": "This document isn’t available.",
+    "loadError": "Couldn’t load this document."
+  }
+}

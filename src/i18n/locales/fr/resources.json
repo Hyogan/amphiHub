@@ -1,0 +1,53 @@
+{
+  "explore": {
+    "title": "Explorer",
+    "all": "Tout",
+    "filters": "Filtres",
+    "level": "Niveau",
+    "year": "Année académique",
+    "onlyCorrected": "Avec correction seulement",
+    "onlyCorrectedHint": "Masque les sujets sans correction",
+    "mine": "Mon université seulement",
+    "reset": "Réinitialiser",
+    "apply": "Voir les résultats",
+    "resultCount_one": "{{count}} résultat",
+    "resultCount_other": "{{count}} résultats",
+    "resultsFor": "pour « {{query}} »",
+    "loadError": "Impossible de charger les résultats.",
+    "emptyTitle": "Aucun sujet trouvé",
+    "emptyBody": "Vérifie l’orthographe ou élargis les filtres. Tu peux aussi demander ce document.",
+    "request": "Demander ce document",
+    "requested": "Demande envoyée. Merci, on s’en occupe.",
+    "clear": "Effacer la recherche",
+    "corrected": "Corrigé"
+  },
+  "session": {
+    "normal": "Session normale",
+    "retake": "Rattrapage",
+    "other": "Autre session"
+  },
+  "language": {
+    "fr": "Français",
+    "en": "Anglais"
+  },
+  "detail": {
+    "university": "Université",
+    "course": "Matière",
+    "year": "Année",
+    "yearUnknown": "Année inconnue",
+    "session": "Session",
+    "language": "Langue",
+    "file": "Fichier",
+    "fileValue": "PDF, {{size}}, {{pages}} pages",
+    "fileValueNoPages": "PDF, {{size}}",
+    "noFile": "Fichier pas encore disponible",
+    "source": "Source",
+    "sourceCommunity": "Déclarée par le contributeur",
+    "sourceOfficial": "Source officielle",
+    "notice": "La relecture vérifie les informations du document, pas l’exactitude des réponses. Compare toujours avec ton cours.",
+    "corrections": "Corrections",
+    "correctionOf": "Correction du sujet",
+    "notFound": "Ce document n’est pas disponible.",
+    "loadError": "Impossible de charger ce document."
+  }
+}
