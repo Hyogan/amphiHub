@@ -99,9 +99,10 @@ select test.check(test.fails($q$
 $q$), 'contributor cannot attach a file in another folder');
 
 -- The contributor cannot change the status or verification directly.
-update public.resources set status = 'published' where id = 'dddddddd-0000-4000-8000-000000000001';
-select test.check((select count(*) from public.resources where id = 'dddddddd-0000-4000-8000-000000000001' and status = 'published') = 0,
+select test.check(test.fails($q$ update public.resources set status = 'published' where id = 'dddddddd-0000-4000-8000-000000000001' $q$),
   'contributor cannot publish by updating the row');
+select test.check((select count(*) from public.resources where id = 'dddddddd-0000-4000-8000-000000000001' and status = 'published') = 0,
+  'the resource is still unpublished');
 select test.check(test.fails($q$ select public.moderate_resource('dddddddd-0000-4000-8000-000000000001', 'publish') $q$),
   'contributor cannot call moderate_resource');
 
@@ -189,6 +190,22 @@ select test.guest();
 insert into public.analytics_events (name, props) values ('search_submitted', '{"q":"inf"}');
 select test.check(true, 'a guest can record an event');
 select test.check(test.fails($q$ select * from public.analytics_events $q$), 'a guest cannot read events');
+
+-- ── Privacy of resource columns ───────────────────────────────────────────────
+select test.guest();
+select test.check(test.fails($q$ select uploader_id from public.resources $q$), 'a guest cannot read who uploaded a resource');
+select test.check(test.fails($q$ select source_note from public.resources $q$), 'a guest cannot read the source note');
+select test.check(test.fails($q$ select moderation_note from public.resources $q$), 'a guest cannot read the moderation note');
+select test.check(test.fails($q$ select * from public.resources $q$), 'select * is refused, columns must be named');
+select test.login('bbbbbbbb-0000-4000-8000-00000000000b');
+select test.check(test.fails($q$ select uploader_id from public.resources $q$), 'a student cannot read uploader ids either');
+select test.check((select count(*) from public.my_submissions()) = 1, 'a contributor lists their own submissions');
+select test.check((select count(*) from public.moderation_queue('published')) = 0, 'a student gets nothing from the moderation queue');
+select test.login('cccccccc-0000-4000-8000-00000000000c');
+select test.check((select count(*) from public.moderation_queue('published')) >= 2, 'a moderator reads the queue with every column');
+select test.check((select count(*) from public.moderation_queue('published') where uploader_id is not null) >= 2, 'a moderator can see uploader ids through the queue');
+select test.guest();
+select test.check(test.fails($q$ select * from public.my_submissions() $q$), 'a guest cannot call my_submissions');
 
 select test.check(test.fails($q$ select storage_path from public.resource_files $q$), 'a guest cannot read storage paths');
 select test.check((select count(*) from public.resource_files where size_bytes > 0) >= 1, 'a guest can read file size');

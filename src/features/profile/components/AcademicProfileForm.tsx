@@ -89,14 +89,6 @@ export function AcademicProfileForm({ profile }: { profile: Profile }) {
   };
 
   const save = async () => {
-    const completedNow = !wasComplete && isComplete;
-    try {
-      await update.mutateAsync({ universityId, programId, level, semester });
-      shake.shake();
-      if (completedNow) celebrate(t("academic.complete"));
-    } catch {
-      toast.error(tc("error.generic"));
-    }
   };
 
   return (
