@@ -1,4 +1,6 @@
 import type {
+  RawCourse,
+  RawCoverageRow,
   RawProgram,
   RawProgramCourseLevel,
   RawUniversity,
@@ -13,10 +15,7 @@ export const catalogApi = {
       .select("id, name, short_name, country_code, primary_language, status")
       .eq("status", "active")
       .order("name");
-    if (error) {
-      console.log(error);
-      throw error;
-    }
+    if (error) throw error;
     return (data ?? []) as RawUniversity[];
   },
 
@@ -40,5 +39,31 @@ export const catalogApi = {
       .eq("program_id", programId);
     if (error) throw error;
     return (data ?? []) as RawProgramCourseLevel[];
+  },
+
+  getCourse: async (id: string): Promise<RawCourse> => {
+    const { data, error } = await supabase
+      .from("courses")
+      .select("id, university_id, name, code, universities(name)")
+      .eq("id", id)
+      .single();
+    if (error) throw error;
+    return data as unknown as RawCourse;
+  },
+
+  courseCoverage: async (input: {
+    programId: string;
+    level: string | null;
+    years: string[];
+    limit: number;
+  }): Promise<RawCoverageRow[]> => {
+    const { data, error } = await supabase.rpc("course_coverage", {
+      p_program: input.programId,
+      p_level: input.level,
+      p_years: input.years,
+      p_limit: input.limit,
+    });
+    if (error) throw error;
+    return (data ?? []) as RawCoverageRow[];
   },
 };

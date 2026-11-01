@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "eyebrow": "Your success starts here",
+    "title": "Study better.\nGo further.",
+    "description": "Your campus resources, all in one place.",
+    "cta": "Explore resources"
+  },
+  "campus": {
+    "label": "Your academic space",
+    "change": "Edit",
+    "levelValue": "level {{level}}",
+    "guestTitle": "Make this home yours",
+    "guestBody": "Create an account and choose your program to see your courses here.",
+    "completeTitle": "Complete your profile",
+    "completeBody": "Choose your university and program to see your courses.",
+    "action": "Get started"
+  },
+  "focus": {
+    "eyebrow": "For your revision",
+    "title": "Everything you need, in one place.",
+    "caption": "Papers, corrections and course material."
+  },
+  "coverage": {
+    "title": "Your courses, year by year",
+    "legendPaper": "Paper",
+    "legendBoth": "Paper and correction",
+    "legendNone": "Missing",
+    "none": "No {{year}} paper yet for {{course}}.",
+    "noCourses": "No course found for your program yet.",
+    "loadError": "Couldn’t load your courses."
+  },
+  "tiles": {
+    "title": "Quick access",
+    "exam": "Exams",
+    "examSub": "Papers from past sessions",
+    "correction": "Corrections",
+    "correctionSub": "Understand every step",
+    "td": "Tutorials",
+    "tdSub": "Practise with exercises",
+    "notes": "Lecture notes",
+    "notesSub": "Material for your courses",
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents"
+  },
+  "recent": {
+    "title": "Recently added",
+    "seeAll": "See all",
+    "empty": "Nothing added yet.",
+    "loadError": "Couldn’t load the latest additions."
+  }
+}

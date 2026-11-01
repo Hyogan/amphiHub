@@ -49,5 +49,14 @@
     "correctionOf": "Correction du sujet",
     "notFound": "Ce document n’est pas disponible.",
     "loadError": "Impossible de charger ce document."
+  },
+  "course": {
+    "documents": "documents",
+    "corrected": "corrigés",
+    "years": "années",
+    "emptyTitle": "Rien ici pour l’instant",
+    "emptyBody": "Aucun document de ce type pour cette UE.",
+    "loadError": "Impossible de charger cette UE.",
+    "notFound": "Cette UE n’existe pas."
   }
 }

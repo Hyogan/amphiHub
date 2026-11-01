@@ -2,10 +2,17 @@ const SEPTEMBER = 8;
 
 // Computed once when the app starts. The academic year begins in September.
 const now = new Date();
-const startYear = now.getMonth() >= SEPTEMBER ? now.getFullYear() : now.getFullYear() - 1;
+const startYear =
+  now.getMonth() >= SEPTEMBER ? now.getFullYear() : now.getFullYear() - 1;
 
 /** The last seven academic years, newest first: ["2026-2027", "2025-2026", ...]. */
-export const ACADEMIC_YEARS: string[] = Array.from({ length: 7 }, (_, i) => `${startYear - i}-${startYear - i + 1}`);
+export const ACADEMIC_YEARS: string[] = Array.from(
+  { length: 7 },
+  (_, i) => `${startYear - i}-${startYear - i + 1}`,
+);
+
+/** The five completed years before the current one: past papers are what students revise from. */
+export const COVERAGE_YEARS: string[] = ACADEMIC_YEARS.slice(1, 6);
 
 /** Levels offered in filters. Programs may use others, but these cover the usual LMD cycle. */
-export const FILTER_LEVELS = ['L1', 'L2', 'L3', 'M1', 'M2'];
+export const FILTER_LEVELS = ["L1", "L2", "L3", "M1", "M2"];

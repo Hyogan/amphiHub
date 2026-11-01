@@ -5,12 +5,14 @@ import { initReactI18next } from "react-i18next";
 
 import enAuth from "./locales/en/auth.json";
 import enCommon from "./locales/en/common.json";
+import enHome from "./locales/en/home.json";
 import enOnboarding from "./locales/en/onboarding.json";
 import enProfile from "./locales/en/profile.json";
 import enResources from "./locales/en/resources.json";
 import enVerification from "./locales/en/verification.json";
 import frAuth from "./locales/fr/auth.json";
 import frCommon from "./locales/fr/common.json";
+import frHome from "./locales/fr/home.json";
 import frOnboarding from "./locales/fr/onboarding.json";
 import frProfile from "./locales/fr/profile.json";
 import frResources from "./locales/fr/resources.json";
@@ -40,6 +42,7 @@ i18n.use(initReactI18next).init({
       auth: frAuth,
       profile: frProfile,
       resources: frResources,
+      home: frHome,
     },
     en: {
       common: enCommon,
@@ -48,12 +51,21 @@ i18n.use(initReactI18next).init({
       auth: enAuth,
       profile: enProfile,
       resources: enResources,
+      home: enHome,
     },
   },
   lng: initialLanguage(),
   fallbackLng: "fr",
   defaultNS: "common",
-  ns: ["common", "onboarding", "verification", "auth", "profile", "resources"],
+  ns: [
+    "common",
+    "onboarding",
+    "verification",
+    "auth",
+    "profile",
+    "resources",
+    "home",
+  ],
   interpolation: { escapeValue: false },
   initAsync: false,
   react: { useSuspense: false },

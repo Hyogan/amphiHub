@@ -49,5 +49,14 @@
     "correctionOf": "Correction of the paper",
     "notFound": "This document isn’t available.",
     "loadError": "Couldn’t load this document."
+  },
+  "course": {
+    "documents": "documents",
+    "corrected": "corrected",
+    "years": "years",
+    "emptyTitle": "Nothing here yet",
+    "emptyBody": "No document of this type for this course.",
+    "loadError": "Couldn’t load this course.",
+    "notFound": "This course doesn’t exist."
   }
 }

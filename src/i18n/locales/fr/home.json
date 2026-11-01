@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "eyebrow": "Ta réussite commence ici",
+    "title": "Révise mieux.\nVa plus loin.",
+    "description": "Les ressources de ton campus, réunies au même endroit.",
+    "cta": "Explorer les ressources"
+  },
+  "campus": {
+    "label": "Ton espace académique",
+    "change": "Modifier",
+    "levelValue": "niveau {{level}}",
+    "guestTitle": "Personnalise ton accueil",
+    "guestBody": "Crée un compte et choisis ta filière pour voir tes UE ici.",
+    "completeTitle": "Complète ton profil",
+    "completeBody": "Choisis ton université et ta filière pour voir tes UE.",
+    "action": "Commencer"
+  },
+  "focus": {
+    "eyebrow": "Pour tes révisions",
+    "title": "Tout ce qu’il te faut, au même endroit.",
+    "caption": "Sujets, corrections et supports de cours."
+  },
+  "coverage": {
+    "title": "Tes UE, année par année",
+    "legendPaper": "Sujet",
+    "legendBoth": "Sujet et correction",
+    "legendNone": "Absent",
+    "none": "Pas encore de sujet {{year}} pour {{course}}.",
+    "noCourses": "Aucune UE trouvée pour ta filière pour l’instant.",
+    "loadError": "Impossible de charger tes UE."
+  },
+  "tiles": {
+    "title": "Accès rapide",
+    "exam": "Examens",
+    "examSub": "Épreuves des sessions précédentes",
+    "correction": "Corrections",
+    "correctionSub": "Comprends chaque étape",
+    "td": "TD",
+    "tdSub": "Entraîne-toi avec des exercices",
+    "notes": "Cours et notes",
+    "notesSub": "Les supports de tes UE",
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents"
+  },
+  "recent": {
+    "title": "Ajoutés récemment",
+    "seeAll": "Tout voir",
+    "empty": "Rien d’ajouté pour l’instant.",
+    "loadError": "Impossible de charger les derniers ajouts."
+  }
+}

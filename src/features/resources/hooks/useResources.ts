@@ -1,9 +1,14 @@
-import { keepPreviousData, useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
+import {
+  keepPreviousData,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+} from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
-import { resourcesApi } from '@/services/api/resourcesApi';
-import { useToast } from '@/shared/toast/useToast';
-import { useAppSelector } from '@/store/hooks';
+import { resourcesApi } from "@/services/api/resourcesApi";
+import { useToast } from "@/shared/toast/useToast";
+import { useAppSelector } from "@/store/hooks";
 
 import {
   toResourceDetail,
@@ -11,14 +16,20 @@ import {
   toResourceSummary,
   toResourceType,
   type SearchParams,
-} from '../types/resource';
+} from "../types/resource";
 
 export const resourceKeys = {
-  all: ['resources'] as const,
-  types: () => [...resourceKeys.all, 'types'] as const,
-  search: (params: SearchParams) => [...resourceKeys.all, 'search', params] as const,
-  detail: (id: string) => [...resourceKeys.all, 'detail', id] as const,
-  relations: (id: string) => [...resourceKeys.all, 'relations', id] as const,
+  all: ["resources"] as const,
+  types: () => [...resourceKeys.all, "types"] as const,
+  search: (params: SearchParams) =>
+    [...resourceKeys.all, "search", params] as const,
+  detail: (id: string) => [...resourceKeys.all, "detail", id] as const,
+  relations: (id: string) => [...resourceKeys.all, "relations", id] as const,
+  counts: () => [...resourceKeys.all, "counts"] as const,
+  recent: (limit: number, universityId: string) =>
+    [...resourceKeys.all, "recent", limit, universityId] as const,
+  course: (courseId: string) =>
+    [...resourceKeys.all, "course", courseId] as const,
 };
 
 const PAGE_SIZE = 20;
@@ -38,7 +49,7 @@ export function useResourceTypeLabel() {
   return (code: string): string => {
     const type = types.data?.find((t) => t.code === code);
     if (!type) return code;
-    return i18n.language === 'en' ? type.labelEn : type.labelFr;
+    return i18n.language === "en" ? type.labelEn : type.labelFr;
   };
 }
 
@@ -47,8 +58,15 @@ export function useSearchResourcesQuery(params: SearchParams) {
   return useInfiniteQuery({
     queryKey: resourceKeys.search(params),
     queryFn: async ({ pageParam }) => {
-      const rows = await resourcesApi.search({ ...params, limit: PAGE_SIZE, offset: pageParam });
-      return { items: rows.map(toResourceSummary), total: rows.length ? Number(rows[0].total_count) : 0 };
+      const rows = await resourcesApi.search({
+        ...params,
+        limit: PAGE_SIZE,
+        offset: pageParam,
+      });
+      return {
+        items: rows.map(toResourceSummary),
+        total: rows.length ? Number(rows[0].total_count) : 0,
+      };
     },
     initialPageParam: 0,
     getNextPageParam: (last, all) => {
@@ -61,7 +79,7 @@ export function useSearchResourcesQuery(params: SearchParams) {
 
 export function useResourceQuery(id?: string) {
   return useQuery({
-    queryKey: resourceKeys.detail(id ?? ''),
+    queryKey: resourceKeys.detail(id ?? ""),
     queryFn: async () => toResourceDetail(await resourcesApi.get(id as string)),
     enabled: Boolean(id),
   });
@@ -69,8 +87,12 @@ export function useResourceQuery(id?: string) {
 
 export function useResourceRelationsQuery(id?: string) {
   return useQuery({
-    queryKey: resourceKeys.relations(id ?? ''),
-    queryFn: async () => toResourceRelations(id as string, await resourcesApi.listRelations(id as string)),
+    queryKey: resourceKeys.relations(id ?? ""),
+    queryFn: async () =>
+      toResourceRelations(
+        id as string,
+        await resourcesApi.listRelations(id as string),
+      ),
     enabled: Boolean(id),
   });
 }
@@ -78,12 +100,57 @@ export function useResourceRelationsQuery(id?: string) {
 export function useRequestResourceMutation() {
   const userId = useAppSelector((state) => state.session.userId);
   const toast = useToast();
-  const { t } = useTranslation('resources');
+  const { t } = useTranslation("resources");
   return useMutation({
-    mutationFn: async (input: { universityId: string | null; query: string }) => {
-      if (!userId) throw new Error('not signed in');
-      await resourcesApi.request({ userId, universityId: input.universityId, query: input.query });
+    mutationFn: async (input: {
+      universityId: string | null;
+      query: string;
+    }) => {
+      if (!userId) throw new Error("not signed in");
+      await resourcesApi.request({
+        userId,
+        universityId: input.universityId,
+        query: input.query,
+      });
     },
-    onSuccess: () => toast.success(t('explore.requested')),
+    onSuccess: () => toast.success(t("explore.requested")),
+  });
+}
+
+/** Published documents per type, as a lookup by type code. */
+export function useResourceCountsQuery() {
+  return useQuery({
+    queryKey: resourceKeys.counts(),
+    queryFn: async () => {
+      const rows = await resourcesApi.counts();
+      return Object.fromEntries(
+        rows.map((r) => [r.type_code, Number(r.total)]),
+      ) as Record<string, number>;
+    },
+    staleTime: 60 * 1000,
+  });
+}
+
+export function useRecentResourcesQuery(
+  limit: number,
+  universityId?: string | null,
+) {
+  return useQuery({
+    queryKey: resourceKeys.recent(limit, universityId ?? ""),
+    queryFn: async () =>
+      (await resourcesApi.recent(limit, universityId ?? null)).map(
+        toResourceSummary,
+      ),
+  });
+}
+
+export function useCourseResourcesQuery(courseId?: string) {
+  return useQuery({
+    queryKey: resourceKeys.course(courseId ?? ""),
+    queryFn: async () =>
+      (await resourcesApi.courseResources(courseId as string)).map(
+        toResourceSummary,
+      ),
+    enabled: Boolean(courseId),
   });
 }
