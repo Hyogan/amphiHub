@@ -16,6 +16,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 
+import { DialogManager } from "@/core/dialog/DialogManager";
 import { AppProviders } from "@/core/providers/AppProviders";
 import { useSessionBootstrap } from "@/features/auth/hooks/useSessionBootstrap";
 import "@/i18n";
@@ -80,6 +81,7 @@ export default function RootLayout() {
       <StatusBar style="auto" />
       <RootNavigator />
       <ToastManager />
+      <DialogManager />
       <CelebrationManager />
     </AppProviders>
   );

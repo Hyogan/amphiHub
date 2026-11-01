@@ -58,5 +58,43 @@
     "emptyBody": "No document of this type for this course.",
     "loadError": "Couldn’t load this course.",
     "notFound": "This course doesn’t exist."
+  },
+  "save": {
+    "add": "Save",
+    "remove": "Remove from saved",
+    "saved": "Saved to your library.",
+    "removed": "Removed from your library.",
+    "error": "Couldn’t update your library."
+  },
+  "saved": {
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents",
+    "emptyTitle": "Nothing saved yet",
+    "emptyBody": "Tap the bookmark on a document to find it here.",
+    "explore": "Explore resources",
+    "guestTitle": "Keep your documents close",
+    "guestBody": "Sign in to save papers and find them again here.",
+    "signIn": "Sign in",
+    "loadError": "Couldn’t load your saved documents."
+  },
+  "download": {
+    "action": "Download ({{size}})",
+    "cancel": "Cancel",
+    "cancelled": "Download cancelled.",
+    "percent": "{{value}}%",
+    "onPhone": "On this phone, {{size}}",
+    "open": "Open",
+    "openError": "No app on this phone can open PDF files.",
+    "delete": "Delete from this phone",
+    "deleteTitle": "Delete this download?",
+    "deleteBody": "“{{title}}” will be removed from this phone. You can download it again later.",
+    "deleteCancel": "Keep it",
+    "deleteConfirm": "Delete",
+    "deleted": "Deleted from this phone.",
+    "done": "Downloaded. It works offline.",
+    "error": "Download failed. Check your connection and try again.",
+    "unavailable": "This file isn’t available for download right now.",
+    "corrupt": "The file arrived damaged and was discarded. Please try again.",
+    "firstDone": "Your first document is on your phone."
   }
 }

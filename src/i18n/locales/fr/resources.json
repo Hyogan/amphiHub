@@ -58,5 +58,43 @@
     "emptyBody": "Aucun document de ce type pour cette UE.",
     "loadError": "Impossible de charger cette UE.",
     "notFound": "Cette UE n’existe pas."
+  },
+  "save": {
+    "add": "Enregistrer",
+    "remove": "Retirer des enregistrés",
+    "saved": "Ajouté à ta bibliothèque.",
+    "removed": "Retiré de ta bibliothèque.",
+    "error": "Impossible de mettre à jour ta bibliothèque."
+  },
+  "saved": {
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents",
+    "emptyTitle": "Rien d’enregistré pour l’instant",
+    "emptyBody": "Appuie sur le marque-page d’un document pour le retrouver ici.",
+    "explore": "Explorer les ressources",
+    "guestTitle": "Garde tes documents à portée de main",
+    "guestBody": "Connecte-toi pour enregistrer des sujets et les retrouver ici.",
+    "signIn": "Se connecter",
+    "loadError": "Impossible de charger tes documents enregistrés."
+  },
+  "download": {
+    "action": "Télécharger ({{size}})",
+    "cancel": "Annuler",
+    "cancelled": "Téléchargement annulé.",
+    "percent": "{{value}} %",
+    "onPhone": "Sur ce téléphone, {{size}}",
+    "open": "Ouvrir",
+    "openError": "Aucune application de ce téléphone ne peut ouvrir les PDF.",
+    "delete": "Supprimer de ce téléphone",
+    "deleteTitle": "Supprimer ce téléchargement ?",
+    "deleteBody": "« {{title}} » sera retiré de ce téléphone. Tu pourras le retélécharger plus tard.",
+    "deleteCancel": "Le garder",
+    "deleteConfirm": "Supprimer",
+    "deleted": "Supprimé de ce téléphone.",
+    "done": "Téléchargé. Disponible hors ligne.",
+    "error": "Échec du téléchargement. Vérifie ta connexion et réessaie.",
+    "unavailable": "Ce fichier n’est pas disponible au téléchargement pour le moment.",
+    "corrupt": "Le fichier est arrivé endommagé et a été supprimé. Réessaie.",
+    "firstDone": "Ton premier document est sur ton téléphone."
   }
 }

@@ -15,13 +15,19 @@ import { useThemeColors } from "@/shared/hooks/theme";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
+import { DownloadPanel } from "@/features/library/components/DownloadPanel";
+import { SaveButton } from "@/features/library/components/SaveButton";
 import { PaperPreview } from "../components/PaperPreview";
 import {
   useResourceQuery,
   useResourceRelationsQuery,
   useResourceTypeLabel,
 } from "../hooks/useResources";
-import { getVerificationKinds, type RelatedResource } from "../types/resource";
+import {
+  getVerificationKinds,
+  toSummaryFromDetail,
+  type RelatedResource,
+} from "../types/resource";
 import { formatFileSize } from "../utils/format";
 
 function KeyValue({ label, value }: { label: string; value: string }) {
@@ -133,7 +139,10 @@ export function ResourceDetailScreen({ id }: { id: string }) {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        <ScreenHeader title={typeLabel(data.typeCode)} />
+        <ScreenHeader
+          title={typeLabel(data.typeCode)}
+          right={<SaveButton resourceId={data.id} />}
+        />
         <PaperPreview
           university={data.universityName}
           course={data.courseName}
@@ -146,6 +155,13 @@ export function ResourceDetailScreen({ id }: { id: string }) {
         </View>
         <Text style={styles.title}>{data.title}</Text>
         <Text style={styles.subtitle}>{subtitle}</Text>
+        <DownloadPanel
+          resource={toSummaryFromDetail(
+            data,
+            (relations.data?.corrections.length ?? 0) > 0,
+          )}
+          fileReady={Boolean(file?.ready)}
+        />
 
         <View style={styles.kvBox}>
           <KeyValue

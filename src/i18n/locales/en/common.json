@@ -29,5 +29,6 @@
   "error": {
     "generic": "Something went wrong. Try again in a moment.",
     "network": "No connection. Check your network."
-  }
+  },
+  "dialog": { "error": "Something went wrong. Please try again." }
 }

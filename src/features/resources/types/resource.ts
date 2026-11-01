@@ -277,3 +277,28 @@ export function getVerificationKinds(r: {
 export function shortYear(academicYear: string | null): string | null {
   return academicYear ? academicYear.slice(5, 9) : null;
 }
+
+/** A list-row summary built from a detail record. Correction presence comes from the relations query. */
+export function toSummaryFromDetail(
+  d: ResourceDetail,
+  hasCorrection: boolean,
+): ResourceSummary {
+  return {
+    id: d.id,
+    title: d.title,
+    universityId: d.universityId,
+    universityName: d.universityName,
+    courseId: d.courseId,
+    courseName: d.courseName,
+    courseCode: d.courseCode,
+    typeCode: d.typeCode,
+    academicYear: d.academicYear,
+    examSession: d.examSession,
+    sourceStatus: d.sourceStatus,
+    metadataReviewed: d.metadataReviewed,
+    correctionReviewed: d.correctionReviewed,
+    hasCorrection,
+    sizeBytes: d.file?.sizeBytes ?? null,
+    pageCount: d.file?.pageCount ?? null,
+  };
+}
