@@ -104,6 +104,18 @@
     "corrupt": "The file arrived damaged and was discarded. Please try again.",
     "firstDone": "Your first document is on your phone.",
     "badge": "Downloaded",
-    "offlineNotice": "You’re offline. Showing the copy on your phone."
+    "offlineNotice": "You’re offline. Showing the copy on your phone.",
+    "openWith": "Open with another app"
+  },
+  "reader": {
+    "page": "Page {{page}} of {{total}}",
+    "a11yPage": "Page {page} of {pageCount}",
+    "missingTitle": "This document isn’t on your phone",
+    "missingBody": "Download it again from its page to read it.",
+    "errorMissing": "The file is missing from this phone. Download it again.",
+    "errorInvalid": "This file can’t be read. Try downloading it again.",
+    "errorProtected": "This PDF is protected and can’t be opened here. Try another app.",
+    "errorMemory": "This file is too heavy for this phone to display. Try another app.",
+    "errorGeneric": "Couldn’t open this document."
   }
 }

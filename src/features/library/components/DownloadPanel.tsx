@@ -13,11 +13,12 @@ import { useAppSelector } from "@/store/hooks";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
+import { useRouter } from "expo-router";
 import {
-    cancelDownload,
-    useDownloadRecord,
-    useOpenDownload,
-    useStartDownload,
+  cancelDownload,
+  useDownloadRecord,
+  useOpenDownload,
+  useStartDownload,
 } from "../hooks/useDownloads";
 
 /** Download, progress, open and delete for one document. Nothing downloads without a tap. */
@@ -33,6 +34,7 @@ export function DownloadPanel({
   const requireAuth = useRequireAuth();
   const dialog = useDialog();
   const styles = createStyles(colors);
+  const router = useRouter();
 
   const record = useDownloadRecord(resource.id).data;
   const progress = useAppSelector(
@@ -63,6 +65,17 @@ export function DownloadPanel({
         </View>
         <Button
           label={t("download.open")}
+          icon="book-outline"
+          onPress={() =>
+            router.push({
+              pathname: "/reader/[id]",
+              params: { id: resource.id },
+            })
+          }
+        />
+        <Button
+          label={t("download.openWith")}
+          kind="outline"
           icon="open-outline"
           onPress={() => openFile(record.localUri)}
         />

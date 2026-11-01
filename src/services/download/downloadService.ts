@@ -1,3 +1,4 @@
+import { clearReaderViewport } from "@/services/storage/readerPosition";
 import * as FileSystem from "expo-file-system/legacy";
 
 import {
@@ -138,6 +139,7 @@ export async function deleteDownload(resourceId: string): Promise<void> {
 
     await discard(row.local_uri);
     await downloadsDb.remove(resourceId);
+    clearReaderViewport(resourceId);
   } catch (error) {
     if (error instanceof DownloadError) throw error;
 

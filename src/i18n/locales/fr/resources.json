@@ -104,6 +104,18 @@
     "corrupt": "Le fichier est arrivé endommagé et a été supprimé. Réessaie.",
     "firstDone": "Ton premier document est sur ton téléphone.",
     "badge": "Téléchargé",
-    "offlineNotice": "Tu es hors ligne. Voici la copie de ton téléphone."
+    "offlineNotice": "Tu es hors ligne. Voici la copie de ton téléphone.",
+    "openWith": "Ouvrir avec une autre application"
+  },
+  "reader": {
+    "page": "Page {{page}} sur {{total}}",
+    "a11yPage": "Page {page} sur {pageCount}",
+    "missingTitle": "Ce document n’est pas sur ton téléphone",
+    "missingBody": "Retélécharge-le depuis sa page pour le lire.",
+    "errorMissing": "Le fichier a disparu de ce téléphone. Retélécharge-le.",
+    "errorInvalid": "Ce fichier est illisible. Essaie de le retélécharger.",
+    "errorProtected": "Ce PDF est protégé et ne peut pas s’ouvrir ici. Essaie une autre application.",
+    "errorMemory": "Ce fichier est trop lourd pour ce téléphone. Essaie une autre application.",
+    "errorGeneric": "Impossible d’ouvrir ce document."
   }
 }
