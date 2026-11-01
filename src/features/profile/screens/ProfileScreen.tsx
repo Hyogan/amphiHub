@@ -51,6 +51,9 @@ export function ProfileScreen() {
               <Text style={styles.email} numberOfLines={1}>
                 {session.email}
               </Text>
+              {session.role && session.role !== "student" ? (
+                <Text style={styles.role}>{t(`role.${session.role}`)}</Text>
+              ) : null}
             </View>
           </View>
         ) : (
@@ -174,6 +177,11 @@ const createStyles = (colors: Colors) =>
       fontFamily: fonts.extrabold,
       fontSize: 16,
       color: colors.text.primary,
+    },
+    role: {
+      fontFamily: fonts.extrabold,
+      fontSize: 13,
+      color: colors.text.link,
     },
     guest: {
       gap: 12,

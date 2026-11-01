@@ -35,5 +35,6 @@
     "emptyUniversities": "Aucune université pour l’instant.",
     "emptyPrograms": "Aucune filière pour cette université pour l’instant.",
     "emptyLevels": "Aucun niveau trouvé."
-  }
+  },
+  "role": { "moderator": "Modérateur", "admin": "Administrateur" }
 }

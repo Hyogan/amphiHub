@@ -117,5 +117,23 @@
     "errorProtected": "Ce PDF est protégé et ne peut pas s’ouvrir ici. Essaie une autre application.",
     "errorMemory": "Ce fichier est trop lourd pour ce téléphone. Essaie une autre application.",
     "errorGeneric": "Impossible d’ouvrir ce document."
+  },
+  "report": {
+    "entry": "Signaler un problème",
+    "title": "Signaler un problème",
+    "subtitle": "Dis-nous ce qui ne va pas avec ce document. Un modérateur l’examinera.",
+    "reason": {
+      "wrong_metadata": "Informations erronées (cours, année, type)",
+      "unreadable": "Fichier illisible ou endommagé",
+      "duplicate": "Doublon d’un autre document",
+      "wrong_correction": "Correction fausse ou trompeuse",
+      "unauthorized_content": "Ne devrait pas être partagé ici (droits)",
+      "other": "Autre chose"
+    },
+    "notePlaceholder": "Ajoute des précisions (facultatif)",
+    "submit": "Envoyer le signalement",
+    "sent": "Merci. Un modérateur va examiner cela.",
+    "alreadySent": "Tu as déjà signalé ce document pour ce motif.",
+    "error": "Impossible d’envoyer ton signalement. Réessaie."
   }
 }

@@ -33,6 +33,12 @@ import { formatFileSize } from "../utils/format";
 import { OfflineDetail } from "@/features/library/components/OfflineDetail";
 import { useDownloadRecord } from "@/features/library/hooks/useDownloads";
 
+// imports
+import { useRequireAuth } from "@/features/auth/hooks/useRequireAuth";
+import type { SheetHandle } from "@/shared/components/AppSheet";
+import { useRef } from "react"; // merge with your existing react import if there is one
+import { ReportSheet } from "../components/ReportSheet";
+
 function KeyValue({ label, value }: { label: string; value: string }) {
   const colors = useThemeColors();
   const styles = createStyles(colors);
@@ -86,7 +92,8 @@ export function ResourceDetailScreen({ id }: { id: string }) {
   const typeLabel = useResourceTypeLabel();
   const styles = createStyles(colors);
   const local = useDownloadRecord(id).data;
-
+  const requireAuth = useRequireAuth();
+  const reportRef = useRef<SheetHandle>(null);
   useEffect(() => {
     track("resource_opened", { id });
   }, [id]);
@@ -234,7 +241,16 @@ export function ResourceDetailScreen({ id }: { id: string }) {
             ))}
           </View>
         ) : null}
+
+        <Button
+          label={t("report.entry")}
+          kind="text"
+          onPress={() => {
+            if (requireAuth()) reportRef.current?.open();
+          }}
+        />
       </ScrollView>
+      <ReportSheet ref={reportRef} resourceId={id} />
     </SafeAreaView>
   );
 }

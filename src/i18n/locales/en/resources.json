@@ -117,5 +117,23 @@
     "errorProtected": "This PDF is protected and can’t be opened here. Try another app.",
     "errorMemory": "This file is too heavy for this phone to display. Try another app.",
     "errorGeneric": "Couldn’t open this document."
+  },
+  "report": {
+    "entry": "Report a problem",
+    "title": "Report a problem",
+    "subtitle": "Tell us what’s wrong with this document. A moderator will look at it.",
+    "reason": {
+      "wrong_metadata": "Wrong details (course, year, type)",
+      "unreadable": "Unreadable or damaged file",
+      "duplicate": "Duplicate of another document",
+      "wrong_correction": "Incorrect or misleading correction",
+      "unauthorized_content": "Shouldn’t be shared here (rights)",
+      "other": "Something else"
+    },
+    "notePlaceholder": "Add details (optional)",
+    "submit": "Send report",
+    "sent": "Thank you. A moderator will review this.",
+    "alreadySent": "You already reported this for that reason.",
+    "error": "Couldn’t send your report. Please try again."
   }
 }

@@ -35,5 +35,6 @@
     "emptyUniversities": "No university yet.",
     "emptyPrograms": "No program for this university yet.",
     "emptyLevels": "No level found."
-  }
+  },
+  "role": { "moderator": "Moderator", "admin": "Administrator" }
 }
