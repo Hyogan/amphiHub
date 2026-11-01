@@ -33,7 +33,7 @@ import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
 import { useAppSelector } from "@/store/hooks";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
-
+import { useRouter } from "expo-router";
 export function ExploreScreen() {
   const colors = useThemeColors();
   const { t } = useTranslation("resources");
@@ -42,7 +42,7 @@ export function ExploreScreen() {
   const requireAuth = useRequireAuth();
   const styles = createStyles(colors);
   const sheetRef = useRef<SheetHandle>(null);
-
+  const router = useRouter();
   const params = useLocalSearchParams<{ type?: string }>();
   const userId = useAppSelector((state) => state.session.userId);
   const dockHeight = useAppSelector((state) => state.dock.height);
@@ -185,6 +185,13 @@ export function ExploreScreen() {
                   onPress={onRequest}
                 />
               ) : null}
+              <Button
+                label={t("contribute.entry")}
+                kind="text"
+                onPress={() => {
+                  if (requireAuth()) router.push("/contribute");
+                }}
+              />
             </EmptyState>
           )
         }

@@ -25,6 +25,7 @@ export function ProfileScreen() {
   const { mode, setMode } = useTheme();
   const { t, i18n } = useTranslation("profile");
   const { t: tc } = useTranslation();
+  const { t: tr } = useTranslation("resources");
   const session = useAppSelector((state) => state.session);
   const signOut = useSignOutMutation();
   const styles = createStyles(colors);
@@ -79,6 +80,14 @@ export function ProfileScreen() {
 
         {signedIn && session.userId ? (
           <AcademicProfileSection userId={session.userId} />
+        ) : null}
+
+        {signedIn ? (
+          <Button
+            label={tr("contribute.entry")}
+            icon="cloud-upload-outline"
+            onPress={() => router.push("/contribute")}
+          />
         ) : null}
 
         <Text style={styles.heading}>{t("appearance")}</Text>
