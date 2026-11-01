@@ -11,6 +11,7 @@ import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
 import { SaveButton } from "@/features/library/components/SaveButton";
+import { useDownloadRecord } from "@/features/library/hooks/useDownloads";
 import { useResourceTypeLabel } from "../hooks/useResources";
 import { getVerificationKinds, type ResourceSummary } from "../types/resource";
 import { formatFileSize } from "../utils/format";
@@ -39,6 +40,7 @@ export function ResourceRow({
     item.sizeBytes !== null
       ? `${formatFileSize(item.sizeBytes, i18n.language)}${item.pageCount ? `, ${item.pageCount} p.` : ""}`
       : null;
+  const downloaded = useDownloadRecord(item.id).data;
 
   return (
     <Pressy
@@ -72,6 +74,16 @@ export function ResourceRow({
         </View>
         <View style={styles.foot}>
           {fileInfo ? <Text style={styles.caption}>{fileInfo}</Text> : null}
+          {downloaded ? (
+            <View style={styles.offline}>
+              <Ionicons
+                name="checkmark-circle"
+                size={14}
+                color={colors.status.success}
+              />
+              <Text style={styles.offlineText}>{t("download.badge")}</Text>
+            </View>
+          ) : null}
           <View style={styles.spacer} />
           {item.hasCorrection ? (
             <View style={styles.corrected}>
@@ -134,5 +146,11 @@ const createStyles = (colors: Colors) =>
       fontFamily: fonts.extrabold,
       fontSize: 13,
       color: colors.status.error,
+    },
+    offline: { flexDirection: "row", alignItems: "center", gap: 4 },
+    offlineText: {
+      fontFamily: fonts.extrabold,
+      fontSize: 13,
+      color: colors.status.success,
     },
   });

@@ -75,7 +75,14 @@
     "guestTitle": "Garde tes documents à portée de main",
     "guestBody": "Connecte-toi pour enregistrer des sujets et les retrouver ici.",
     "signIn": "Se connecter",
-    "loadError": "Impossible de charger tes documents enregistrés."
+    "loadError": "Impossible de charger tes documents enregistrés.",
+    "tabSaved": "Enregistrés",
+    "tabPhone": "Sur ce téléphone",
+    "seePhone": "Voir ce qui est sur ce téléphone",
+    "phoneEmptyTitle": "Rien sur ce téléphone",
+    "phoneEmptyBody": "Télécharge un sujet pour le lire sans connexion.",
+    "phoneSummary_one": "{{count}} document, {{size}}",
+    "phoneSummary_other": "{{count}} documents, {{size}}"
   },
   "download": {
     "action": "Télécharger ({{size}})",
@@ -95,6 +102,8 @@
     "error": "Échec du téléchargement. Vérifie ta connexion et réessaie.",
     "unavailable": "Ce fichier n’est pas disponible au téléchargement pour le moment.",
     "corrupt": "Le fichier est arrivé endommagé et a été supprimé. Réessaie.",
-    "firstDone": "Ton premier document est sur ton téléphone."
+    "firstDone": "Ton premier document est sur ton téléphone.",
+    "badge": "Téléchargé",
+    "offlineNotice": "Tu es hors ligne. Voici la copie de ton téléphone."
   }
 }

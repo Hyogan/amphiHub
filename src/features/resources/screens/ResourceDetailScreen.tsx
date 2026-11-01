@@ -29,6 +29,9 @@ import {
   type RelatedResource,
 } from "../types/resource";
 import { formatFileSize } from "../utils/format";
+// imports
+import { OfflineDetail } from "@/features/library/components/OfflineDetail";
+import { useDownloadRecord } from "@/features/library/hooks/useDownloads";
 
 function KeyValue({ label, value }: { label: string; value: string }) {
   const colors = useThemeColors();
@@ -82,6 +85,7 @@ export function ResourceDetailScreen({ id }: { id: string }) {
   const relations = useResourceRelationsQuery(id);
   const typeLabel = useResourceTypeLabel();
   const styles = createStyles(colors);
+  const local = useDownloadRecord(id).data;
 
   useEffect(() => {
     track("resource_opened", { id });
@@ -101,7 +105,9 @@ export function ResourceDetailScreen({ id }: { id: string }) {
       </SafeAreaView>
     );
   }
-
+  if ((detail.isError || !data) && local && !notFound) {
+    return <OfflineDetail record={local} />;
+  }
   if (detail.isError || !data) {
     return (
       <SafeAreaView style={styles.root} edges={["top"]}>

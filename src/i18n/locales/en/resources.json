@@ -75,7 +75,14 @@
     "guestTitle": "Keep your documents close",
     "guestBody": "Sign in to save papers and find them again here.",
     "signIn": "Sign in",
-    "loadError": "Couldn’t load your saved documents."
+    "loadError": "Couldn’t load your saved documents.",
+    "tabSaved": "Saved",
+    "tabPhone": "On this phone",
+    "seePhone": "See what’s on this phone",
+    "phoneEmptyTitle": "Nothing on this phone",
+    "phoneEmptyBody": "Download a paper to read it without a connection.",
+    "phoneSummary_one": "{{count}} document, {{size}}",
+    "phoneSummary_other": "{{count}} documents, {{size}}"
   },
   "download": {
     "action": "Download ({{size}})",
@@ -95,6 +102,8 @@
     "error": "Download failed. Check your connection and try again.",
     "unavailable": "This file isn’t available for download right now.",
     "corrupt": "The file arrived damaged and was discarded. Please try again.",
-    "firstDone": "Your first document is on your phone."
+    "firstDone": "Your first document is on your phone.",
+    "badge": "Downloaded",
+    "offlineNotice": "You’re offline. Showing the copy on your phone."
   }
 }
