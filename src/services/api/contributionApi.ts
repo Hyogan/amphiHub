@@ -1,8 +1,10 @@
 import type {
-    RawCourseHit,
-    RawResourceFileInsert,
-    RawResourceInsert,
+  RawCourseHit,
+  RawResourceFileInsert,
+  RawResourceInsert,
 } from "@/features/contribute/types/contribution";
+import type { RawSubmissionRow } from "@/features/contribute/types/submission";
+import type { RawSuggestionInsert } from "@/features/contribute/types/suggestion";
 import { supabase } from "@/services/supabase/client";
 
 /** Raw in, raw out. Everything here needs a signed-in user. */
@@ -12,12 +14,16 @@ export const contributionApi = {
     universityId: string | null,
     limit: number,
   ): Promise<RawCourseHit[]> => {
+    console.log("searchCourses", { query, universityId, limit });
     const { data, error } = await supabase.rpc("search_courses", {
       p_query: query,
       p_university: universityId,
       p_limit: limit,
     });
-    if (error) throw error;
+    if (error) {
+      console.log(error);
+      throw error;
+    }
     return (data ?? []) as RawCourseHit[];
   },
 
@@ -52,6 +58,23 @@ export const contributionApi = {
       p_sha256: sha256,
       p_page_count: pageCount,
     });
+    if (error) throw error;
+  },
+
+  // inside contributionApi:
+  listMine: async (): Promise<RawSubmissionRow[]> => {
+    const { data, error } = await supabase
+      .from("my_contributions")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return (data ?? []) as RawSubmissionRow[];
+  },
+
+  suggestCourse: async (payload: RawSuggestionInsert): Promise<void> => {
+    const { error } = await supabase
+      .from("catalog_suggestions")
+      .insert(payload);
     if (error) throw error;
   },
 };

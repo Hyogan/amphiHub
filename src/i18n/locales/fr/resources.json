@@ -195,5 +195,37 @@
     "errorUpload": "L’envoi a échoué. Vérifie ta connexion et réessaie.",
     "errorSave": "Impossible d’enregistrer ta proposition. Vérifie les informations et réessaie.",
     "errorFinalize": "Ton document a été envoyé mais demande l’attention d’un modérateur. Dis-le-nous s’il n’apparaît pas."
+  },
+  "suggest": {
+    "link": "Tu ne trouves pas ton cours ? Propose-le",
+    "title": "Proposer un cours",
+    "body": "Un modérateur l’ajoutera au catalogue. Reviens envoyer ton document dès qu’il apparaît.",
+    "name": "Nom du cours",
+    "code": "Code du cours (facultatif)",
+    "submit": "Envoyer la proposition",
+    "back": "Retour à la recherche",
+    "sent": "Merci ! Un modérateur va examiner ta proposition.",
+    "error": "Impossible d’envoyer ta proposition. Réessaie.",
+    "errorName": "Saisis le nom du cours (au moins 3 lettres)."
+  },
+  "contributions": {
+    "entry": "Mes contributions",
+    "title": "Mes contributions",
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents",
+    "emptyTitle": "Tu n’as rien envoyé pour l’instant",
+    "emptyBody": "Les documents que tu envoies apparaissent ici avec leur statut.",
+    "contribute": "Contribuer avec un document",
+    "loadError": "Impossible de charger tes contributions.",
+    "reasonLabel": "Note du modérateur",
+    "sentOn": "Envoyé le {{date}}",
+    "status": {
+      "submitted": "En attente de vérification",
+      "in_review": "En cours de vérification",
+      "published": "Publié",
+      "rejected": "Refusé",
+      "restricted": "Restreint",
+      "removed": "Retiré"
+    }
   }
 }

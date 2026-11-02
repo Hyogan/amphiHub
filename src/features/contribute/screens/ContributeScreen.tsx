@@ -10,8 +10,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useUniversitiesQuery } from "@/features/catalog/hooks/useCatalog";
 import { useProfileQuery } from "@/features/profile/hooks/useProfile";
 import {
-    useResourceTypeLabel,
-    useResourceTypesQuery,
+  useResourceTypeLabel,
+  useResourceTypesQuery,
 } from "@/features/resources/hooks/useResources";
 import { ACADEMIC_YEARS } from "@/features/resources/utils/academicYears";
 import { formatFileSize } from "@/features/resources/utils/format";
@@ -33,14 +33,14 @@ import { fonts } from "@/theme/typography";
 import { CoursePickerSheet } from "../components/CoursePickerSheet";
 import { useSubmitContribution } from "../hooks/useContribute";
 import {
-    createContributionSchema,
-    type ContributionValues,
+  createContributionSchema,
+  type ContributionValues,
 } from "../schemas/contribution.validation";
 import {
-    EXAM_SESSIONS,
-    SOURCE_TYPES,
-    UNKNOWN_YEAR,
-    type CourseHit,
+  EXAM_SESSIONS,
+  SOURCE_TYPES,
+  UNKNOWN_YEAR,
+  type CourseHit,
 } from "../types/contribution";
 
 function ChoiceRow({
@@ -198,7 +198,8 @@ export function ContributeScreen() {
       { file, values },
       {
         onSuccess: () =>
-          router.canGoBack() ? router.back() : router.replace("/(tabs)"),
+          // router.canGoBack() ? router.back() : router.replace("/(tabs)"),
+          router.replace("/contributions"),
       },
     );
   });

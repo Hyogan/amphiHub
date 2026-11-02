@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
 
 import {
-    AppSheet,
-    SheetTextInput,
-    type SheetHandle,
+  AppSheet,
+  SheetTextInput,
+  type SheetHandle,
 } from "@/shared/components/AppSheet";
 import { Button } from "@/shared/components/Button";
 import { Pressy } from "@/shared/components/Pressy";
@@ -15,7 +15,10 @@ import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
-import { useCourseSearchQuery } from "../hooks/useContribute";
+import {
+  useCourseSearchQuery,
+  useSuggestCourseMutation,
+} from "../hooks/useContribute";
 import type { CourseHit } from "../types/contribution";
 
 export function CoursePickerSheet({
@@ -31,15 +34,88 @@ export function CoursePickerSheet({
   const { t } = useTranslation("resources");
   const { t: tc } = useTranslation();
   const inner = useRef<SheetHandle>(null);
+  const [mode, setMode] = useState<"search" | "suggest">("search");
   const [text, setText] = useState("");
+  const [name, setName] = useState("");
+  const [code, setCode] = useState("");
+  const [nameError, setNameError] = useState(false);
   const term = useDebouncedValue(text.trim(), 350);
   const search = useCourseSearchQuery(term, universityId);
+  const suggest = useSuggestCourseMutation();
   const styles = createStyles(colors);
 
   useImperativeHandle(ref, () => ({
-    open: () => inner.current?.open(),
+    open: () => {
+      setMode("search");
+      inner.current?.open();
+    },
     close: () => inner.current?.close(),
   }));
+
+  function openSuggest() {
+    setName(text.trim());
+    setCode("");
+    setNameError(false);
+    setMode("suggest");
+  }
+
+  function sendSuggestion() {
+    if (!universityId) return;
+    if (name.trim().length < 3) {
+      setNameError(true);
+      return;
+    }
+    suggest.mutate(
+      { universityId, name, code },
+      {
+        onSuccess: () => {
+          setMode("search");
+          inner.current?.close();
+        },
+      },
+    );
+  }
+
+  if (mode === "suggest") {
+    return (
+      <AppSheet ref={inner}>
+        <Text style={styles.title}>{t("contribute.suggest.title")}</Text>
+        <Text style={styles.hint}>{t("contribute.suggest.body")}</Text>
+        <Text style={styles.label}>{t("contribute.suggest.name")}</Text>
+        <SheetTextInput
+          value={name}
+          onChangeText={(value) => {
+            setName(value);
+            setNameError(false);
+          }}
+          maxLength={200}
+          style={styles.input}
+        />
+        {nameError ? (
+          <Text style={styles.error}>{t("contribute.suggest.errorName")}</Text>
+        ) : null}
+        <Text style={styles.label}>{t("contribute.suggest.code")}</Text>
+        <SheetTextInput
+          value={code}
+          onChangeText={setCode}
+          maxLength={40}
+          autoCapitalize="characters"
+          autoCorrect={false}
+          style={styles.input}
+        />
+        <Button
+          label={t("contribute.suggest.submit")}
+          loading={suggest.isPending}
+          onPress={sendSuggestion}
+        />
+        <Button
+          label={t("contribute.suggest.back")}
+          kind="text"
+          onPress={() => setMode("search")}
+        />
+      </AppSheet>
+    );
+  }
 
   let body;
   if (term.length < 2) {
@@ -94,6 +170,11 @@ export function CoursePickerSheet({
         style={styles.input}
       />
       {body}
+      <Button
+        label={t("contribute.suggest.link")}
+        kind="text"
+        onPress={openSuggest}
+      />
     </AppSheet>
   );
 }
@@ -105,6 +186,11 @@ const createStyles = (colors: Colors) =>
       fontSize: 22,
       color: colors.text.primary,
       letterSpacing: -0.3,
+    },
+    label: {
+      fontFamily: fonts.extrabold,
+      fontSize: 15,
+      color: colors.text.primary,
     },
     input: {
       minHeight: 52,
@@ -122,6 +208,7 @@ const createStyles = (colors: Colors) =>
       lineHeight: 22,
       color: colors.text.secondary,
     },
+    error: { fontFamily: fonts.bold, fontSize: 13, color: colors.status.error },
     state: { gap: 12 },
     row: {
       gap: 2,

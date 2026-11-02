@@ -195,5 +195,37 @@
     "errorUpload": "The upload failed. Check your connection and try again.",
     "errorSave": "Couldn’t save your submission. Check the details and try again.",
     "errorFinalize": "Your document was sent but needs a moderator’s attention. Please tell us if it doesn’t appear."
+  },
+  "suggest": {
+    "link": "Can’t find your course? Suggest it",
+    "title": "Suggest a course",
+    "body": "A moderator will add it to the catalogue. Come back to send your document once it appears.",
+    "name": "Course name",
+    "code": "Course code (optional)",
+    "submit": "Send suggestion",
+    "back": "Back to search",
+    "sent": "Thank you! A moderator will review your suggestion.",
+    "error": "Couldn’t send your suggestion. Please try again.",
+    "errorName": "Enter the course name (at least 3 letters)."
+  },
+  "contributions": {
+    "entry": "My contributions",
+    "title": "My contributions",
+    "count_one": "{{count}} document",
+    "count_other": "{{count}} documents",
+    "emptyTitle": "You haven’t sent anything yet",
+    "emptyBody": "Documents you contribute appear here with their status.",
+    "contribute": "Contribute a document",
+    "loadError": "Couldn’t load your contributions.",
+    "reasonLabel": "Moderator’s note",
+    "sentOn": "Sent on {{date}}",
+    "status": {
+      "submitted": "Waiting for review",
+      "in_review": "Being reviewed",
+      "published": "Published",
+      "rejected": "Rejected",
+      "restricted": "Restricted",
+      "removed": "Removed"
+    }
   }
 }

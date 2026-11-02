@@ -83,11 +83,19 @@ export function ProfileScreen() {
         ) : null}
 
         {signedIn ? (
-          <Button
-            label={tr("contribute.entry")}
-            icon="cloud-upload-outline"
-            onPress={() => router.push("/contribute")}
-          />
+          <>
+            <Button
+              label={tr("contribute.entry")}
+              icon="cloud-upload-outline"
+              onPress={() => router.push("/contribute")}
+            />
+            <Button
+              label={tr("contributions.entry")}
+              kind="outline"
+              icon="list-outline"
+              onPress={() => router.push("/contributions")}
+            />
+          </>
         ) : null}
 
         <Text style={styles.heading}>{t("appearance")}</Text>

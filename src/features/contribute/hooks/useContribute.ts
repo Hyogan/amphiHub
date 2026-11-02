@@ -1,21 +1,25 @@
 import {
-    keepPreviousData,
-    useMutation,
-    useQuery,
-    useQueryClient,
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
 } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
 import { track } from "@/services/analytics";
 import { contributionApi } from "@/services/api/contributionApi";
 import {
-    ContributionError,
-    submitContribution,
+  ContributionError,
+  submitContribution,
 } from "@/services/upload/contributionService";
 import type { PickedPdf } from "@/services/upload/pickPdf";
 import { useCelebrate } from "@/shared/celebration/useCelebrate";
 import { useToast } from "@/shared/toast/useToast";
 import { useAppSelector } from "@/store/hooks";
+import {
+  toRawSuggestionInsert,
+  type CourseSuggestionInput,
+} from "../types/suggestion";
 
 import { toCourseHit, type ContributionInput } from "../types/contribution";
 
@@ -80,5 +84,22 @@ export function useSubmitContribution() {
         ),
       );
     },
+  });
+}
+
+export function useSuggestCourseMutation() {
+  const userId = useAppSelector((state) => state.session.userId);
+  const toast = useToast();
+  const { t } = useTranslation("resources");
+  return useMutation({
+    mutationFn: async (input: CourseSuggestionInput) => {
+      if (!userId) throw new Error("not signed in");
+      await contributionApi.suggestCourse(toRawSuggestionInsert(input, userId));
+    },
+    onSuccess: () => {
+      toast.success(t("contribute.suggest.sent"));
+      track("catalog_suggestion_sent", { kind: "course" });
+    },
+    onError: () => toast.error(t("contribute.suggest.error")),
   });
 }
