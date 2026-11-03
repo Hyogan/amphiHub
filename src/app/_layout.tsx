@@ -20,10 +20,10 @@ import { DialogManager } from "@/core/dialog/DialogManager";
 import { AppProviders } from "@/core/providers/AppProviders";
 import { useSessionBootstrap } from "@/features/auth/hooks/useSessionBootstrap";
 import "@/i18n";
+import "@/services/network/onlineManager";
 import { CelebrationManager } from "@/shared/celebration/CelebrationManager";
 import { ToastManager } from "@/shared/toast/ToastManager";
 import { useAppSelector } from "@/store/hooks";
-
 SplashScreen.preventAutoHideAsync();
 
 /**

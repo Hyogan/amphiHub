@@ -13,6 +13,8 @@ import { useThemeColors } from "@/shared/hooks/theme";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
+import { OfflineState } from "@/shared/components/Offline";
+import { isOfflinePending } from "@/shared/utils/network";
 import { ResourceRow } from "../components/ResourceRow";
 import {
   useCourseResourcesQuery,
@@ -43,6 +45,16 @@ export function CourseScreen({ id }: { id: string }) {
   const notFound =
     (course.error as { code?: string } | null)?.code === "PGRST116";
 
+  if (isOfflinePending(course) || isOfflinePending(resources)) {
+    return (
+      <SafeAreaView style={styles.root} edges={["top"]}>
+        <View style={styles.content}>
+          <ScreenHeader />
+          <OfflineState />
+        </View>
+      </SafeAreaView>
+    );
+  }
   if (course.isPending || resources.isPending) {
     return (
       <SafeAreaView style={styles.root} edges={["top"]}>

@@ -30,5 +30,15 @@
     "generic": "Une erreur est survenue. Réessaie dans un instant.",
     "network": "Pas de connexion. Vérifie ton réseau."
   },
-  "dialog": { "error": "Un problème est survenu. Réessaie." }
+  "dialog": { "error": "Un problème est survenu. Réessaie." },
+  "offline": {
+    "notice": "Tu es hors ligne. Les documents téléchargés fonctionnent toujours.",
+    "seeDownloads": "Voir mes téléchargements",
+    "title": "Tu es hors ligne",
+    "body": "Cela demande une connexion. Tes documents téléchargés fonctionnent toujours.",
+    "section": "Demande une connexion.",
+    "localSearch": "Tu es hors ligne. La recherche porte uniquement sur les documents de ton téléphone.",
+    "localEmptyTitle": "Aucun document téléchargé ne correspond",
+    "localEmptyBody": "Connecte-toi pour chercher dans toute la bibliothèque."
+  }
 }

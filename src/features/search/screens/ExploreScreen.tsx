@@ -6,6 +6,7 @@ import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useRequireAuth } from "@/features/auth/hooks/useRequireAuth";
+import { useDownloadsQuery } from "@/features/library/hooks/useDownloads";
 import { useProfileQuery } from "@/features/profile/hooks/useProfile";
 import {
   countActiveFilters,
@@ -21,19 +22,23 @@ import {
   useSearchResourcesQuery,
 } from "@/features/resources/hooks/useResources";
 import type { SearchParams } from "@/features/resources/types/resource";
+import { matchesSearch } from "@/features/resources/utils/localSearch";
 import { track } from "@/services/analytics";
 import type { SheetHandle } from "@/shared/components/AppSheet";
 import { Button } from "@/shared/components/Button";
 import { EmptyState } from "@/shared/components/common/EmptyState";
+import { OfflineNotice } from "@/shared/components/Offline";
 import { Pressy } from "@/shared/components/Pressy";
 import { SkeletonRows } from "@/shared/components/SkeletonRows";
 import { Tag } from "@/shared/components/Tag";
 import { useThemeColors } from "@/shared/hooks/theme";
 import { useDebouncedValue } from "@/shared/hooks/useDebouncedValue";
+import { useIsOnline } from "@/shared/hooks/useIsOnline";
 import { useAppSelector } from "@/store/hooks";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 import { useRouter } from "expo-router";
+
 export function ExploreScreen() {
   const colors = useThemeColors();
   const { t } = useTranslation("resources");
@@ -72,9 +77,17 @@ export function ExploreScreen() {
   };
   const search = useSearchResourcesQuery(searchParams);
   const request = useRequestResourceMutation();
+  const online = useIsOnline();
+  const downloads = useDownloadsQuery();
+  const localItems = (downloads.data ?? [])
+    .map((record) => record.summary)
+    .filter((summary) => matchesSearch(summary, debounced, typeCode));
 
-  const items = search.data?.pages.flatMap((page) => page.items) ?? [];
-  const total = search.data?.pages[0]?.total ?? 0;
+  const onlineItems = search.data?.pages.flatMap((page) => page.items) ?? [];
+  const items = online ? onlineItems : localItems;
+  const total = online
+    ? (search.data?.pages[0]?.total ?? 0)
+    : localItems.length;
 
   useEffect(() => {
     if (debounced) {
@@ -145,7 +158,9 @@ export function ExploreScreen() {
           />
         ))}
       </ScrollView>
-      {search.isSuccess && items.length > 0 ? (
+      <OfflineNotice message={tc("offline.localSearch")} showAction={false} />
+
+      {(online ? search.isSuccess : true) && items.length > 0 ? (
         <Text style={styles.count}>
           {t("explore.resultCount", { count: total })}
           {debounced ? ` ${t("explore.resultsFor", { query: debounced })}` : ""}
@@ -162,7 +177,12 @@ export function ExploreScreen() {
         renderItem={({ item }) => <ResourceRow item={item} />}
         ListHeaderComponent={header}
         ListEmptyComponent={
-          search.isPending ? (
+          !online ? (
+            <EmptyState
+              title={tc("offline.localEmptyTitle")}
+              body={tc("offline.localEmptyBody")}
+            />
+          ) : search.isPending ? (
             <SkeletonRows count={5} />
           ) : search.isError ? (
             <EmptyState title={t("explore.loadError")}>
@@ -199,7 +219,7 @@ export function ExploreScreen() {
           search.isFetchingNextPage ? <SkeletonRows count={2} /> : null
         }
         onEndReached={() => {
-          if (search.hasNextPage && !search.isFetchingNextPage) {
+          if (online && search.hasNextPage && !search.isFetchingNextPage) {
             search.fetchNextPage();
           }
         }}

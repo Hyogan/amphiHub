@@ -30,5 +30,15 @@
     "generic": "Something went wrong. Try again in a moment.",
     "network": "No connection. Check your network."
   },
-  "dialog": { "error": "Something went wrong. Please try again." }
+  "dialog": { "error": "Something went wrong. Please try again." },
+  "offline": {
+    "notice": "You’re offline. Documents you downloaded still work.",
+    "seeDownloads": "See my downloads",
+    "title": "You’re offline",
+    "body": "This needs a connection. Your downloaded documents still work.",
+    "section": "Needs a connection.",
+    "localSearch": "You’re offline. Searching only the documents on your phone.",
+    "localEmptyTitle": "No downloaded document matches",
+    "localEmptyBody": "Connect to search the whole library."
+  }
 }

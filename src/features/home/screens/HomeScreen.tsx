@@ -27,12 +27,13 @@ import { useAppSelector } from "@/store/hooks";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
+import { OfflineNotice, OfflineSection } from "@/shared/components/Offline";
+import { isOfflinePending } from "@/shared/utils/network";
 import { CampusChip, type CampusChipState } from "../components/CampusChip";
 import { CoverageGrid } from "../components/CoverageGrid";
 import { Hero } from "../components/Hero";
 import { QuickTiles } from "../components/QuickTiles";
 import { StudyFocus } from "../components/StudyFocus";
-
 export function HomeScreen() {
   const colors = useThemeColors();
   const router = useRouter();
@@ -83,9 +84,12 @@ export function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <AppTopBar />
+        <OfflineNotice />
+
         <Hero onExplore={() => goExplore()} />
 
-        {profileQuery.isLoading ? null : (
+        {/* // (A paused query is "pending", so the old isLoading check would show "Complete your profile" offline.) */}
+        {userId && profileQuery.isPending ? null : (
           <CampusChip
             state={chipState}
             universityName={universityName}
@@ -104,7 +108,9 @@ export function HomeScreen() {
         {profile?.programId ? (
           <View style={styles.section}>
             <Text style={styles.heading}>{t("coverage.title")}</Text>
-            {coverage.isPending ? (
+            {isOfflinePending(coverage) ? (
+              <OfflineSection />
+            ) : coverage.isPending ? (
               <SkeletonRows count={3} />
             ) : coverage.isError ? (
               <EmptyState title={t("coverage.loadError")}>
@@ -141,7 +147,9 @@ export function HomeScreen() {
               <Text style={styles.seeAll}>{t("recent.seeAll")}</Text>
             </Tap>
           </View>
-          {recent.isPending ? (
+          {isOfflinePending(recent) ? (
+            <OfflineSection />
+          ) : recent.isPending ? (
             <SkeletonRows count={3} />
           ) : recent.isError ? (
             <EmptyState title={t("recent.loadError")}>

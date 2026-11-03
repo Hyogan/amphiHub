@@ -1,5 +1,5 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,7 +17,9 @@ import { fonts } from "@/theme/typography";
 
 import { useDownloadsQuery } from "../hooks/useDownloads";
 import { useSavedResourcesQuery } from "../hooks/useLibrary";
-
+// imports
+import { OfflineNotice, OfflineState } from "@/shared/components/Offline";
+import { isOfflinePending } from "@/shared/utils/network";
 type Tab = "saved" | "phone";
 
 export function SavedScreen() {
@@ -26,7 +28,13 @@ export function SavedScreen() {
   const { t, i18n } = useTranslation("resources");
   const { t: tc } = useTranslation();
   const styles = createStyles(colors);
-  const [tab, setTab] = useState<Tab>("saved");
+  const params = useLocalSearchParams<{ tab?: string }>();
+  const [tab, setTab] = useState<Tab>(
+    params.tab === "phone" ? "phone" : "saved",
+  );
+  useEffect(() => {
+    if (params.tab === "phone") setTab("phone");
+  }, [params.tab]);
 
   const userId = useAppSelector((state) => state.session.userId);
   const dockHeight = useAppSelector((state) => state.dock.height);
@@ -70,6 +78,8 @@ export function SavedScreen() {
           onPress={() => setTab("phone")}
         />
       </ScrollView>
+      <OfflineNotice showAction={false} />
+
       {subline ? <Text style={styles.count}>{subline}</Text> : null}
     </View>
   );
@@ -92,6 +102,13 @@ export function SavedScreen() {
           onPress={() => router.navigate("/(auth)/login")}
         />
       </EmptyState>
+    );
+  } else if (isOfflinePending(saved)) {
+    empty = (
+      <OfflineState
+        actionLabel={t("saved.seePhone")}
+        onAction={() => setTab("phone")}
+      />
     );
   } else if (saved.isPending) {
     empty = <SkeletonRows count={4} />;

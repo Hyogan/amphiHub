@@ -38,6 +38,7 @@ import { useRequireAuth } from "@/features/auth/hooks/useRequireAuth";
 import { useIsModerator } from "@/features/moderation/hooks/useModeration";
 import type { SheetHandle } from "@/shared/components/AppSheet";
 import { KeyValue } from "@/shared/components/common/KeyValue";
+import { OfflineState } from "@/shared/components/Offline";
 import { useRef } from "react"; // merge with your existing react import if there is one
 import { ReportSheet } from "../components/ReportSheet";
 
@@ -105,6 +106,18 @@ export function ResourceDetailScreen({ id }: { id: string }) {
   const notFound =
     (detail.error as { code?: string } | null)?.code === "PGRST116";
   const data = detail.data;
+
+  if (detail.isPending && detail.fetchStatus === "paused") {
+    if (local) return <OfflineDetail record={local} />;
+    return (
+      <SafeAreaView style={styles.root} edges={["top"]}>
+        <View style={styles.content}>
+          <ScreenHeader />
+          <OfflineState />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   if (detail.isPending) {
     return (

@@ -31,6 +31,7 @@ export function useDownloadsQuery() {
     queryKey: downloadKeys.list(),
     queryFn: loadDownloads,
     staleTime: Infinity, // changes only through the mutations and dialogs below, which invalidate it
+    networkMode: "always",
   });
 }
 
@@ -40,6 +41,7 @@ export function useDownloadRecord(resourceId: string) {
     queryKey: downloadKeys.list(),
     queryFn: loadDownloads,
     staleTime: Infinity,
+    networkMode: "always",
     select: (records) => records.find((r) => r.resourceId === resourceId),
   });
 }
