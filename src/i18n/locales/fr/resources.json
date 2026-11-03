@@ -194,19 +194,19 @@
     "errorFile": "Ce fichier ne peut pas être lu comme un PDF.",
     "errorUpload": "L’envoi a échoué. Vérifie ta connexion et réessaie.",
     "errorSave": "Impossible d’enregistrer ta proposition. Vérifie les informations et réessaie.",
-    "errorFinalize": "Ton document a été envoyé mais demande l’attention d’un modérateur. Dis-le-nous s’il n’apparaît pas."
-  },
-  "suggest": {
-    "link": "Tu ne trouves pas ton cours ? Propose-le",
-    "title": "Proposer un cours",
-    "body": "Un modérateur l’ajoutera au catalogue. Reviens envoyer ton document dès qu’il apparaît.",
-    "name": "Nom du cours",
-    "code": "Code du cours (facultatif)",
-    "submit": "Envoyer la proposition",
-    "back": "Retour à la recherche",
-    "sent": "Merci ! Un modérateur va examiner ta proposition.",
-    "error": "Impossible d’envoyer ta proposition. Réessaie.",
-    "errorName": "Saisis le nom du cours (au moins 3 lettres)."
+    "errorFinalize": "Ton document a été envoyé mais demande l’attention d’un modérateur. Dis-le-nous s’il n’apparaît pas.",
+    "suggest": {
+      "link": "Tu ne trouves pas ton cours ? Propose-le",
+      "title": "Proposer un cours",
+      "body": "Un modérateur l’ajoutera au catalogue. Reviens envoyer ton document dès qu’il apparaît.",
+      "name": "Nom du cours",
+      "code": "Code du cours (facultatif)",
+      "submit": "Envoyer la proposition",
+      "back": "Retour à la recherche",
+      "sent": "Merci ! Un modérateur va examiner ta proposition.",
+      "error": "Impossible d’envoyer ta proposition. Réessaie.",
+      "errorName": "Saisis le nom du cours (au moins 3 lettres)."
+    }
   },
   "contributions": {
     "entry": "Mes contributions",
@@ -226,6 +226,55 @@
       "rejected": "Refusé",
       "restricted": "Restreint",
       "removed": "Retiré"
+    }
+  },
+  "moderation": {
+    "entry": "Modération",
+    "title": "Modération",
+    "reviewTitle": "Vérification",
+    "fileTitle": "Fichier proposé",
+    "tabWaiting": "En attente",
+    "tabInReview": "En cours",
+    "emptyTitle": "Rien en attente",
+    "emptyBody": "Les nouvelles propositions apparaîtront ici.",
+    "loadError": "Impossible de charger les propositions.",
+    "notAllowed": "Cet espace est réservé aux modérateurs.",
+    "sentOn": "Envoyé le {{date}}",
+    "possibleDuplicate": "Doublon possible",
+    "fileNotReady": "Fichier non prêt",
+    "type": "Type",
+    "source": "Source",
+    "sourceNote": "Précisions sur la source",
+    "rights": "Déclaration de droits",
+    "rightsDeclared": "Confirmée par le contributeur",
+    "submitted": "Envoyé",
+    "duplicateNote": "Le fichier correspond à un autre document : « {{title}} ». Compare-les avant de publier.",
+    "openDuplicate": "Ouvrir l’autre document",
+    "fileNotReadyNote": "Le fichier n’est pas prêt : ce document ne peut pas encore être publié.",
+    "previousNote": "Note précédente",
+    "readFile": "Lire le fichier",
+    "fileError": "Impossible d’ouvrir le fichier pour vérification.",
+    "startReview": "Commencer la vérification",
+    "publish": "Publier",
+    "reject": "Refuser",
+    "started": "Vérification commencée.",
+    "published": "Publié. Il est maintenant visible par les étudiants.",
+    "rejected": "Refusé. Le contributeur verra ton motif.",
+    "error": "Impossible de mettre à jour ce document. Réessaie.",
+    "errorInvalid": "Ce n’est pas possible pour le moment. Le document a peut-être changé : reviens en arrière et actualise.",
+    "publishDialog": {
+      "title": "Publier ce document ?",
+      "body": "« {{title}} » deviendra visible par tous les étudiants. Tu pourras le restreindre ou le retirer plus tard, mais pas le modifier.",
+      "cancel": "Pas encore",
+      "confirm": "Publier"
+    },
+    "reasonSheet": {
+      "rejectTitle": "Refuser ce document",
+      "rejectBody": "Le contributeur verra ton motif. Sois clair et bienveillant.",
+      "publishTitle": "Publier malgré tout ?",
+      "publishBody": "Ce fichier correspond à un autre document. Explique pourquoi il doit quand même être publié.",
+      "placeholder": "Motif",
+      "tooShort": "Écris un motif (au moins 3 caractères)."
     }
   }
 }

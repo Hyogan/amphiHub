@@ -36,19 +36,20 @@ import { useDownloadRecord } from "@/features/library/hooks/useDownloads";
 // imports
 import { useRequireAuth } from "@/features/auth/hooks/useRequireAuth";
 import type { SheetHandle } from "@/shared/components/AppSheet";
+import { KeyValue } from "@/shared/components/common/KeyValue";
 import { useRef } from "react"; // merge with your existing react import if there is one
 import { ReportSheet } from "../components/ReportSheet";
 
-function KeyValue({ label, value }: { label: string; value: string }) {
-  const colors = useThemeColors();
-  const styles = createStyles(colors);
-  return (
-    <View style={styles.kv}>
-      <Text style={styles.kvKey}>{label}</Text>
-      <Text style={styles.kvValue}>{value}</Text>
-    </View>
-  );
-}
+// function KeyValue({ label, value }: { label: string; value: string }) {
+//   const colors = useThemeColors();
+//   const styles = createStyles(colors);
+//   return (
+//     <View style={styles.kv}>
+//       <Text style={styles.kvKey}>{label}</Text>
+//       <Text style={styles.kvValue}>{value}</Text>
+//     </View>
+//   );
+// }
 
 function RelatedRow({
   item,
@@ -274,26 +275,26 @@ const createStyles = (colors: Colors) =>
       marginTop: -6,
     },
     kvBox: { borderTopWidth: 2, borderTopColor: colors.text.primary },
-    kv: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      gap: 16,
-      paddingVertical: 12,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.border.subtle,
-    },
-    kvKey: {
-      fontFamily: fonts.semibold,
-      fontSize: 14,
-      color: colors.text.secondary,
-    },
-    kvValue: {
-      fontFamily: fonts.bold,
-      fontSize: 14,
-      color: colors.text.primary,
-      flexShrink: 1,
-      textAlign: "right",
-    },
+    // kv: {
+    //   flexDirection: "row",
+    //   justifyContent: "space-between",
+    //   gap: 16,
+    //   paddingVertical: 12,
+    //   borderBottomWidth: 1,
+    //   borderBottomColor: colors.border.subtle,
+    // },
+    // kvKey: {
+    //   fontFamily: fonts.semibold,
+    //   fontSize: 14,
+    //   color: colors.text.secondary,
+    // },
+    // kvValue: {
+    //   fontFamily: fonts.bold,
+    //   fontSize: 14,
+    //   color: colors.text.primary,
+    //   flexShrink: 1,
+    //   textAlign: "right",
+    // },
     margin: {
       borderLeftWidth: 3,
       borderLeftColor: colors.status.error,

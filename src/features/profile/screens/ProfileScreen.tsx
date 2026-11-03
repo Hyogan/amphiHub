@@ -98,6 +98,15 @@ export function ProfileScreen() {
           </>
         ) : null}
 
+        {signedIn && session.role && session.role !== "student" ? (
+          <Button
+            label={tr("moderation.entry")}
+            kind="outline"
+            icon="shield-checkmark-outline"
+            onPress={() => router.push("/moderation")}
+          />
+        ) : null}
+
         <Text style={styles.heading}>{t("appearance")}</Text>
         <Text style={styles.caption}>{t("language")}</Text>
         <View style={styles.row}>

@@ -194,20 +194,21 @@
     "errorFile": "This file can’t be read as a PDF.",
     "errorUpload": "The upload failed. Check your connection and try again.",
     "errorSave": "Couldn’t save your submission. Check the details and try again.",
-    "errorFinalize": "Your document was sent but needs a moderator’s attention. Please tell us if it doesn’t appear."
+    "errorFinalize": "Your document was sent but needs a moderator’s attention. Please tell us if it doesn’t appear.",
+    "suggest": {
+      "link": "Can’t find your course? Suggest it",
+      "title": "Suggest a course",
+      "body": "A moderator will add it to the catalogue. Come back to send your document once it appears.",
+      "name": "Course name",
+      "code": "Course code (optional)",
+      "submit": "Send suggestion",
+      "back": "Back to search",
+      "sent": "Thank you! A moderator will review your suggestion.",
+      "error": "Couldn’t send your suggestion. Please try again.",
+      "errorName": "Enter the course name (at least 3 letters)."
+    }
   },
-  "suggest": {
-    "link": "Can’t find your course? Suggest it",
-    "title": "Suggest a course",
-    "body": "A moderator will add it to the catalogue. Come back to send your document once it appears.",
-    "name": "Course name",
-    "code": "Course code (optional)",
-    "submit": "Send suggestion",
-    "back": "Back to search",
-    "sent": "Thank you! A moderator will review your suggestion.",
-    "error": "Couldn’t send your suggestion. Please try again.",
-    "errorName": "Enter the course name (at least 3 letters)."
-  },
+
   "contributions": {
     "entry": "My contributions",
     "title": "My contributions",
@@ -226,6 +227,55 @@
       "rejected": "Rejected",
       "restricted": "Restricted",
       "removed": "Removed"
+    }
+  },
+  "moderation": {
+    "entry": "Moderation",
+    "title": "Moderation",
+    "reviewTitle": "Review",
+    "fileTitle": "Submitted file",
+    "tabWaiting": "Waiting",
+    "tabInReview": "In review",
+    "emptyTitle": "Nothing waiting",
+    "emptyBody": "New submissions will appear here.",
+    "loadError": "Couldn’t load the submissions.",
+    "notAllowed": "This area is for moderators.",
+    "sentOn": "Sent on {{date}}",
+    "possibleDuplicate": "Possible duplicate",
+    "fileNotReady": "File not ready",
+    "type": "Type",
+    "source": "Source",
+    "sourceNote": "Source details",
+    "rights": "Rights declaration",
+    "rightsDeclared": "Confirmed by the contributor",
+    "submitted": "Sent",
+    "duplicateNote": "The file matches another document: “{{title}}”. Compare them before publishing.",
+    "openDuplicate": "Open the other document",
+    "fileNotReadyNote": "The file isn’t ready, so this document can’t be published yet.",
+    "previousNote": "Earlier note",
+    "readFile": "Read the file",
+    "fileError": "Couldn’t open the file for review.",
+    "startReview": "Start review",
+    "publish": "Publish",
+    "reject": "Reject",
+    "started": "Review started.",
+    "published": "Published. It’s now visible to students.",
+    "rejected": "Rejected. The contributor will see your reason.",
+    "error": "Couldn’t update this document. Please try again.",
+    "errorInvalid": "That isn’t possible right now. The document may have changed: go back and refresh.",
+    "publishDialog": {
+      "title": "Publish this document?",
+      "body": "“{{title}}” becomes visible to every student. You can restrict or remove it later, but you can’t edit it.",
+      "cancel": "Not yet",
+      "confirm": "Publish"
+    },
+    "reasonSheet": {
+      "rejectTitle": "Reject this document",
+      "rejectBody": "The contributor will see your reason. Be clear and kind.",
+      "publishTitle": "Publish anyway?",
+      "publishBody": "This file matches another document. Explain why it should still be published.",
+      "placeholder": "Reason",
+      "tooShort": "Write a reason (at least 3 characters)."
     }
   }
 }

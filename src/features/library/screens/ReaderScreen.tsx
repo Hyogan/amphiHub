@@ -15,19 +15,19 @@ import { ScreenHeader } from "@/shared/components/common/ScreenHeader";
 import { Pressy } from "@/shared/components/Pressy";
 import { SkeletonRows } from "@/shared/components/SkeletonRows";
 import { useThemeColors } from "@/shared/hooks/theme";
+import { pdfErrorKey } from "@/shared/utils/pdfErrorKey";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
-
 import { useDownloadRecord, useOpenDownload } from "../hooks/useDownloads";
 
-const ERROR_KEYS: Record<string, string> = {
-  "file-not-found": "reader.errorMissing",
-  "invalid-pdf": "reader.errorInvalid",
-  "unsupported-pdf": "reader.errorProtected",
-  "password-required": "reader.errorProtected",
-  "invalid-password": "reader.errorProtected",
-  "out-of-memory": "reader.errorMemory",
-};
+// const ERROR_KEYS: Record<string, string> = {
+//   "file-not-found": "reader.errorMissing",
+//   "invalid-pdf": "reader.errorInvalid",
+//   "unsupported-pdf": "reader.errorProtected",
+//   "password-required": "reader.errorProtected",
+//   "invalid-password": "reader.errorProtected",
+//   "out-of-memory": "reader.errorMemory",
+// };
 
 /** Reads a downloaded PDF inside the app. Works offline: the file is on the phone. */
 export function ReaderScreen({ id }: { id: string }) {
@@ -105,9 +105,7 @@ export function ReaderScreen({ id }: { id: string }) {
       <SafeAreaView style={styles.root} edges={["top"]}>
         {header}
         <View style={styles.padded}>
-          <EmptyState
-            title={t(ERROR_KEYS[error.code] ?? "reader.errorGeneric")}
-          >
+          <EmptyState title={t(pdfErrorKey(error.code))}>
             <Button
               label={tc("actions.retry")}
               kind="outline"
