@@ -69,6 +69,10 @@ export interface ModerationItem {
   fileReady: boolean;
   sizeBytes: number | null;
   pageCount: number | null;
+
+  sourceStatus: RawModerationRow["source_status"];
+  metadataReviewed: boolean;
+  correctionReviewed: boolean;
 }
 
 export interface ModerateInput {
@@ -106,6 +110,10 @@ export function toModerationItem(raw: RawModerationRow): ModerationItem {
     fileReady: raw.file_status === "ready",
     sizeBytes: raw.size_bytes,
     pageCount: raw.page_count,
+
+    sourceStatus: raw.source_status,
+    metadataReviewed: raw.metadata_reviewed,
+    correctionReviewed: raw.correction_reviewed,
   };
 }
 
@@ -115,5 +123,170 @@ export function toRawModerateArgs(input: ModerateInput): RawModerateArgs {
     p_resource_id: input.resourceId,
     p_action: input.action,
     p_reason: input.reason?.trim() || null,
+  };
+}
+
+export type SourceStatus = RawModerationRow["source_status"];
+
+// ── Reports ──────────────────────────────────────────────────────────────────
+export interface RawModerationReportRow {
+  id: string;
+  resource_id: string;
+  resource_title: string;
+  resource_status: SubmissionStatus;
+  course_name: string;
+  university_name: string;
+  reason: string;
+  details: string | null;
+  status: "open" | "resolved" | "dismissed";
+  resolution: string | null;
+  created_at: string;
+  resolved_at: string | null;
+  open_on_resource: number | string;
+}
+
+export interface ModerationReport {
+  id: string;
+  resourceId: string;
+  resourceTitle: string;
+  courseName: string;
+  universityName: string;
+  reason: string;
+  details: string | null;
+  createdAt: string;
+  openOnResource: number;
+}
+
+export function toModerationReport(
+  raw: RawModerationReportRow,
+): ModerationReport {
+  return {
+    id: raw.id,
+    resourceId: raw.resource_id,
+    resourceTitle: raw.resource_title,
+    courseName: raw.course_name,
+    universityName: raw.university_name,
+    reason: raw.reason,
+    details: raw.details,
+    createdAt: raw.created_at,
+    openOnResource: Number(raw.open_on_resource),
+  };
+}
+
+export interface ResolveReportInput {
+  reportId: string;
+  decision: "resolved" | "dismissed";
+  resolution: string;
+}
+
+export interface RawResolveReportArgs {
+  p_report_id: string;
+  p_decision: "resolved" | "dismissed";
+  p_resolution: string;
+}
+
+export function toRawResolveReportArgs(
+  i: ResolveReportInput,
+): RawResolveReportArgs {
+  return {
+    p_report_id: i.reportId,
+    p_decision: i.decision,
+    p_resolution: i.resolution.trim(),
+  };
+}
+
+// ── Course suggestions ───────────────────────────────────────────────────────
+export interface RawModerationSuggestionRow {
+  id: string;
+  university_id: string | null;
+  university_name: string | null;
+  kind: "course" | "program" | "unit";
+  payload: unknown;
+  status: "pending" | "accepted" | "rejected";
+  created_at: string;
+}
+
+export interface ModerationSuggestion {
+  id: string;
+  universityName: string;
+  kind: RawModerationSuggestionRow["kind"];
+  name: string;
+  code: string | null;
+  createdAt: string;
+  /** Only course suggestions with a university can be accepted from the app. */
+  acceptable: boolean;
+}
+
+export function toModerationSuggestion(
+  raw: RawModerationSuggestionRow,
+): ModerationSuggestion {
+  const payload = (
+    raw.payload && typeof raw.payload === "object" ? raw.payload : {}
+  ) as Record<string, unknown>;
+  return {
+    id: raw.id,
+    universityName: raw.university_name ?? "",
+    kind: raw.kind,
+    name: typeof payload.name === "string" ? payload.name : "",
+    code:
+      typeof payload.code === "string" && payload.code ? payload.code : null,
+    createdAt: raw.created_at,
+    acceptable: raw.kind === "course" && raw.university_id !== null,
+  };
+}
+
+export interface ReviewSuggestionInput {
+  suggestionId: string;
+  decision: "accept" | "reject";
+  name: string;
+  code: string;
+}
+
+export interface RawReviewSuggestionArgs {
+  p_suggestion_id: string;
+  p_decision: "accept" | "reject";
+  p_name: string | null;
+  p_code: string | null;
+}
+
+export function toRawReviewSuggestionArgs(
+  i: ReviewSuggestionInput,
+): RawReviewSuggestionArgs {
+  const accept = i.decision === "accept";
+  return {
+    p_suggestion_id: i.suggestionId,
+    p_decision: i.decision,
+    p_name: accept ? i.name.trim() : null,
+    p_code: accept ? i.code.trim() : null, // '' clears the code
+  };
+}
+
+// ── Verification labels ──────────────────────────────────────────────────────
+/** A null field is left unchanged by the database function. */
+export interface VerificationInput {
+  resourceId: string;
+  metadataReviewed: boolean | null;
+  sourceStatus: SourceStatus | null;
+  correctionReviewed: boolean | null;
+  note: string;
+}
+
+export interface RawVerificationArgs {
+  p_resource_id: string;
+  p_metadata_reviewed: boolean | null;
+  p_source_status: SourceStatus | null;
+  p_correction_reviewed: boolean | null;
+  p_note: string | null;
+}
+
+export function toRawVerificationArgs(
+  i: VerificationInput,
+): RawVerificationArgs {
+  return {
+    p_resource_id: i.resourceId,
+    p_metadata_reviewed: i.metadataReviewed,
+    p_source_status: i.sourceStatus,
+    p_correction_reviewed: i.correctionReviewed,
+    p_note: i.note.trim() || null,
   };
 }

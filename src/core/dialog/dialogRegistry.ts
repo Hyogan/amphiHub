@@ -1,5 +1,9 @@
 import { buildConfirmDeleteDownloadDialog } from "@/features/library/dialogs/downloadDialogs";
-import { buildConfirmPublishResourceDialog } from "@/features/moderation/dialogs/moderationDialogs";
+import {
+  buildConfirmPublishResourceDialog,
+  buildConfirmRemoveResourceDialog,
+  buildConfirmRestoreResourceDialog,
+} from "@/features/moderation/dialogs/moderationDialogs";
 
 import {
   DIALOG_KEYS,
@@ -32,4 +36,6 @@ export type DialogBuilder<K extends DialogKey> = (
 export const DIALOG_REGISTRY: { [K in DialogKey]: DialogBuilder<K> } = {
   [DIALOG_KEYS.CONFIRM_DELETE_DOWNLOAD]: buildConfirmDeleteDownloadDialog,
   [DIALOG_KEYS.CONFIRM_PUBLISH_RESOURCE]: buildConfirmPublishResourceDialog,
+  [DIALOG_KEYS.CONFIRM_RESTORE_RESOURCE]: buildConfirmRestoreResourceDialog,
+  [DIALOG_KEYS.CONFIRM_REMOVE_RESOURCE]: buildConfirmRemoveResourceDialog,
 };

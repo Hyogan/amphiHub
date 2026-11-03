@@ -273,8 +273,86 @@
       "rejectBody": "Le contributeur verra ton motif. Sois clair et bienveillant.",
       "publishTitle": "Publier malgré tout ?",
       "publishBody": "Ce fichier correspond à un autre document. Explique pourquoi il doit quand même être publié.",
+      "restrictTitle": "Restreindre ce document",
+      "restrictBody": "Les étudiants perdent l’accès immédiatement. Tu pourras le rétablir. Dis pourquoi.",
+      "removeTitle": "Retirer ce document",
+      "removeBody": "Le retrait est définitif. Dis pourquoi. Une confirmation te sera demandée.",
+      "continue": "Continuer",
       "placeholder": "Motif",
       "tooShort": "Écris un motif (au moins 3 caractères)."
+    },
+    "tabRestricted": "Restreints",
+    "tabReports": "Signalements",
+    "tabSuggestions": "Suggestions",
+    "moderateThis": "Modérer ce document",
+    "restrict": "Restreindre",
+    "restore": "Rétablir",
+    "remove": "Retirer",
+    "restricted": "Restreint. Les étudiants ne peuvent plus l’ouvrir.",
+    "restored": "Rétabli. Il est de nouveau visible.",
+    "removed": "Retiré.",
+    "errorForbidden": "Tu n’as pas le droit de faire cela. Un modérateur ne peut pas valider ses propres envois.",
+    "openDocument": "Ouvrir le document",
+    "openOnResource_one": "{{count}} signalement ouvert sur ce document",
+    "openOnResource_other": "{{count}} signalements ouverts sur ce document",
+    "resolve": "Résoudre",
+    "dismiss": "Écarter",
+    "reportResolved": "Signalement résolu.",
+    "reportDismissed": "Signalement écarté.",
+    "reportsEmptyTitle": "Aucun signalement ouvert",
+    "reportsEmptyBody": "Les signalements des étudiants apparaissent ici.",
+    "reportsLoadError": "Impossible de charger les signalements.",
+    "suggestionsEmptyTitle": "Aucune suggestion en attente",
+    "suggestionsEmptyBody": "Les cours manquants proposés par les étudiants apparaissent ici.",
+    "suggestionsLoadError": "Impossible de charger les suggestions.",
+    "suggestionAccepted": "Cours ajouté au catalogue.",
+    "suggestionRejected": "Suggestion refusée.",
+    "suggestionKind": {
+      "course": "Cours",
+      "program": "Filière",
+      "unit": "Faculté ou unité"
+    },
+    "suggestionSheet": {
+      "title": "Suggestion de cours",
+      "accept": "Ajouter au catalogue",
+      "reject": "Refuser",
+      "studioOnly": "Seules les suggestions de cours peuvent être acceptées ici. Ajoute celle-ci dans Supabase Studio, puis refuse-la."
+    },
+    "resolveSheet": {
+      "resolveTitle": "Résoudre ce signalement",
+      "dismissTitle": "Écarter ce signalement",
+      "body": "Écris ce que tu as fait, ou pourquoi rien n’avait besoin de changer. C’est conservé dans le journal d’audit.",
+      "placeholder": "Note"
+    },
+    "restoreDialog": {
+      "title": "Rétablir ce document ?",
+      "body": "« {{title}} » redeviendra visible par les étudiants.",
+      "cancel": "Pas encore",
+      "confirm": "Rétablir"
+    },
+    "removeDialog": {
+      "title": "Retirer ce document ?",
+      "body": "« {{title}} » disparaît pour tout le monde. Cette action est définitive.",
+      "cancel": "Le garder",
+      "confirm": "Retirer"
+    },
+    "verification": {
+      "edit": "Modifier les étiquettes de vérification",
+      "title": "Étiquettes de vérification",
+      "caution": "Ces étiquettes décrivent les informations et la source du document. Elles ne disent jamais que ses réponses sont justes.",
+      "metadata": "Informations vérifiées (cours, année, type)",
+      "source": "Source",
+      "sourceStatus": {
+        "unverified": "Non vérifiée",
+        "confirmed": "Source confirmée",
+        "official_confirmed": "Source officielle"
+      },
+      "noteLabel": "Note de preuve",
+      "noteHelp": "Obligatoire pour une source officielle. Dis comment tu l’as vérifiée.",
+      "noteMissing": "Écris comment tu as vérifié la source.",
+      "correction": "Correction vérifiée",
+      "save": "Enregistrer les étiquettes",
+      "saved": "Étiquettes mises à jour."
     }
   }
 }

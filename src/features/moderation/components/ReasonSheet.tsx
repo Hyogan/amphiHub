@@ -3,10 +3,12 @@ import { useImperativeHandle, useRef, useState, type Ref } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Text } from "react-native";
 
+import { DIALOG_KEYS } from "@/core/dialog/dialogKeys";
+import { useDialog } from "@/core/dialog/useDialog";
 import {
-    AppSheet,
-    SheetTextInput,
-    type SheetHandle,
+  AppSheet,
+  SheetTextInput,
+  type SheetHandle,
 } from "@/shared/components/AppSheet";
 import { Button } from "@/shared/components/Button";
 import { useThemeColors } from "@/shared/hooks/theme";
@@ -15,24 +17,29 @@ import { fonts } from "@/theme/typography";
 
 import { useModerateMutation } from "../hooks/useModeration";
 
+export type ReasonAction = "reject" | "publish" | "restrict" | "remove";
+
+/** Collects the written reason these actions require. Removal then asks for a last confirmation. */
 export function ReasonSheet({
   ref,
   resourceId,
+  title,
   action,
 }: {
   ref: Ref<SheetHandle>;
   resourceId: string;
-  action: "reject" | "publish";
+  title: string;
+  action: ReasonAction;
 }) {
   const colors = useThemeColors();
   const router = useRouter();
+  const dialog = useDialog();
   const { t } = useTranslation("resources");
   const inner = useRef<SheetHandle>(null);
   const [reason, setReason] = useState("");
   const [tooShort, setTooShort] = useState(false);
   const moderate = useModerateMutation();
   const styles = createStyles(colors);
-  const reject = action === "reject";
 
   useImperativeHandle(ref, () => ({
     open: () => {
@@ -46,6 +53,16 @@ export function ReasonSheet({
   function submit() {
     if (reason.trim().length < 3) {
       setTooShort(true);
+      return;
+    }
+    if (action === "remove") {
+      // Close the sheet before the dialog opens.
+      inner.current?.close();
+      dialog.open(DIALOG_KEYS.CONFIRM_REMOVE_RESOURCE, {
+        resourceId,
+        title,
+        reason: reason.trim(),
+      });
       return;
     }
     moderate.mutate(
@@ -62,18 +79,10 @@ export function ReasonSheet({
   return (
     <AppSheet ref={inner}>
       <Text style={styles.title}>
-        {t(
-          reject
-            ? "moderation.reasonSheet.rejectTitle"
-            : "moderation.reasonSheet.publishTitle",
-        )}
+        {t(`moderation.reasonSheet.${action}Title`)}
       </Text>
       <Text style={styles.body}>
-        {t(
-          reject
-            ? "moderation.reasonSheet.rejectBody"
-            : "moderation.reasonSheet.publishBody",
-        )}
+        {t(`moderation.reasonSheet.${action}Body`)}
       </Text>
       <SheetTextInput
         value={reason}
@@ -91,8 +100,12 @@ export function ReasonSheet({
         <Text style={styles.error}>{t("moderation.reasonSheet.tooShort")}</Text>
       ) : null}
       <Button
-        label={t(reject ? "moderation.reject" : "moderation.publish")}
-        kind={reject ? "danger" : "primary"}
+        label={
+          action === "remove"
+            ? t("moderation.reasonSheet.continue")
+            : t(`moderation.${action}`)
+        }
+        kind={action === "publish" ? "primary" : "danger"}
         loading={moderate.isPending}
         onPress={submit}
       />

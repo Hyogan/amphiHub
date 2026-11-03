@@ -35,6 +35,7 @@ import { useDownloadRecord } from "@/features/library/hooks/useDownloads";
 
 // imports
 import { useRequireAuth } from "@/features/auth/hooks/useRequireAuth";
+import { useIsModerator } from "@/features/moderation/hooks/useModeration";
 import type { SheetHandle } from "@/shared/components/AppSheet";
 import { KeyValue } from "@/shared/components/common/KeyValue";
 import { useRef } from "react"; // merge with your existing react import if there is one
@@ -95,6 +96,8 @@ export function ResourceDetailScreen({ id }: { id: string }) {
   const local = useDownloadRecord(id).data;
   const requireAuth = useRequireAuth();
   const reportRef = useRef<SheetHandle>(null);
+  const isModerator = useIsModerator();
+  const router = useRouter();
   useEffect(() => {
     track("resource_opened", { id });
   }, [id]);
@@ -250,6 +253,16 @@ export function ResourceDetailScreen({ id }: { id: string }) {
             if (requireAuth()) reportRef.current?.open();
           }}
         />
+        {isModerator ? (
+          <Button
+            label={t("moderation.moderateThis")}
+            kind="outline"
+            icon="shield-checkmark-outline"
+            onPress={() =>
+              router.push({ pathname: "/review/[id]", params: { id } })
+            }
+          />
+        ) : null}
       </ScrollView>
       <ReportSheet ref={reportRef} resourceId={id} />
     </SafeAreaView>

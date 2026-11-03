@@ -14,7 +14,7 @@ export const contributionApi = {
     universityId: string | null,
     limit: number,
   ): Promise<RawCourseHit[]> => {
-    console.log("searchCourses", { query, universityId, limit });
+    // console.log("searchCourses", { query, universityId, limit });
     const { data, error } = await supabase.rpc("search_courses", {
       p_query: query,
       p_university: universityId,

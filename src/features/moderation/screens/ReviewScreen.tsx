@@ -9,6 +9,7 @@ import { DIALOG_KEYS } from "@/core/dialog/dialogKeys";
 import { useDialog } from "@/core/dialog/useDialog";
 import { getSubmissionStatusConfig } from "@/features/contribute/utils/getSubmissionStatusConfig";
 import { useResourceTypeLabel } from "@/features/resources/hooks/useResources";
+import { getVerificationKinds } from "@/features/resources/types/resource";
 import { formatFileSize } from "@/features/resources/utils/format";
 import type { SheetHandle } from "@/shared/components/AppSheet";
 import { Button } from "@/shared/components/Button";
@@ -16,15 +17,17 @@ import { EmptyState } from "@/shared/components/common/EmptyState";
 import { KeyValue } from "@/shared/components/common/KeyValue";
 import { ScreenHeader } from "@/shared/components/common/ScreenHeader";
 import { SkeletonRows } from "@/shared/components/SkeletonRows";
+import { Stamp } from "@/shared/components/Stamp";
 import { useThemeColors } from "@/shared/hooks/theme";
 import type { Colors } from "@/theme/colors";
 import { fonts } from "@/theme/typography";
 
-import { ReasonSheet } from "../components/ReasonSheet";
+import { ReasonSheet, type ReasonAction } from "../components/ReasonSheet";
+import { VerificationSheet } from "../components/VerificationSheet";
 import {
-    useIsModerator,
-    useModerateMutation,
-    useModerationItemQuery,
+  useIsModerator,
+  useModerateMutation,
+  useModerationItemQuery,
 } from "../hooks/useModeration";
 
 export function ReviewScreen({ id }: { id: string }) {
@@ -39,9 +42,8 @@ export function ReviewScreen({ id }: { id: string }) {
   const item = useModerationItemQuery(id);
   const moderate = useModerateMutation();
   const reasonSheet = useRef<SheetHandle>(null);
-  const [reasonAction, setReasonAction] = useState<"reject" | "publish">(
-    "reject",
-  );
+  const verificationSheet = useRef<SheetHandle>(null);
+  const [reasonAction, setReasonAction] = useState<ReasonAction>("reject");
 
   if (!isModerator) {
     return (
@@ -82,10 +84,12 @@ export function ReviewScreen({ id }: { id: string }) {
 
   const data = item.data;
   const status = getSubmissionStatusConfig(data.status, colors, t);
-  const open = data.status === "submitted" || data.status === "in_review";
   const session = data.examSession ? t(`session.${data.examSession}`) : null;
+  const canLabel = ["in_review", "published", "restricted"].includes(
+    data.status,
+  );
 
-  function openReason(action: "reject" | "publish") {
+  function openReason(action: ReasonAction) {
     setReasonAction(action);
     reasonSheet.current?.open();
   }
@@ -161,6 +165,21 @@ export function ReviewScreen({ id }: { id: string }) {
           </View>
         ) : null}
 
+        {canLabel ? (
+          <View style={styles.labels}>
+            <View style={styles.stamps}>
+              {getVerificationKinds(data).map((kind) => (
+                <Stamp key={kind} kind={kind} />
+              ))}
+            </View>
+            <Button
+              label={t("moderation.verification.edit")}
+              kind="text"
+              onPress={() => verificationSheet.current?.open()}
+            />
+          </View>
+        ) : null}
+
         <View style={styles.kvBox}>
           <KeyValue
             label={t("detail.university")}
@@ -224,9 +243,9 @@ export function ReviewScreen({ id }: { id: string }) {
           />
         </View>
 
-        {open ? (
-          <View style={styles.actions}>
-            {data.status === "submitted" ? (
+        <View style={styles.actions}>
+          {data.status === "submitted" ? (
+            <>
               <Button
                 label={t("moderation.startReview")}
                 icon="play-outline"
@@ -239,26 +258,77 @@ export function ReviewScreen({ id }: { id: string }) {
                   })
                 }
               />
-            ) : (
+              <Button
+                label={t("moderation.reject")}
+                kind="danger"
+                icon="close-circle-outline"
+                onPress={() => openReason("reject")}
+              />
+            </>
+          ) : null}
+          {data.status === "in_review" ? (
+            <>
               <Button
                 label={t("moderation.publish")}
                 icon="checkmark-circle-outline"
                 disabled={!data.fileReady}
                 onPress={onPublish}
               />
-            )}
-            <Button
-              label={t("moderation.reject")}
-              kind="danger"
-              icon="close-circle-outline"
-              onPress={() => openReason("reject")}
-            />
-          </View>
-        ) : null}
+              <Button
+                label={t("moderation.reject")}
+                kind="danger"
+                icon="close-circle-outline"
+                onPress={() => openReason("reject")}
+              />
+            </>
+          ) : null}
+          {data.status === "published" ? (
+            <>
+              <Button
+                label={t("moderation.restrict")}
+                kind="outline"
+                icon="lock-closed-outline"
+                onPress={() => openReason("restrict")}
+              />
+              <Button
+                label={t("moderation.remove")}
+                kind="danger"
+                icon="trash-outline"
+                onPress={() => openReason("remove")}
+              />
+            </>
+          ) : null}
+          {data.status === "restricted" ? (
+            <>
+              <Button
+                label={t("moderation.restore")}
+                icon="lock-open-outline"
+                onPress={() =>
+                  dialog.open(DIALOG_KEYS.CONFIRM_RESTORE_RESOURCE, {
+                    resourceId: id,
+                    title: data.title,
+                  })
+                }
+              />
+              <Button
+                label={t("moderation.remove")}
+                kind="danger"
+                icon="trash-outline"
+                onPress={() => openReason("remove")}
+              />
+            </>
+          ) : null}
+        </View>
       </ScrollView>
 
       {/* Sheets are siblings of the scroll content, never inside it. */}
-      <ReasonSheet ref={reasonSheet} resourceId={id} action={reasonAction} />
+      <ReasonSheet
+        ref={reasonSheet}
+        resourceId={id}
+        title={data.title}
+        action={reasonAction}
+      />
+      <VerificationSheet ref={verificationSheet} item={data} />
     </SafeAreaView>
   );
 }
@@ -285,6 +355,8 @@ const createStyles = (colors: Colors) =>
       letterSpacing: -0.5,
       color: colors.text.primary,
     },
+    labels: { gap: 4 },
+    stamps: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
     kvBox: { borderTopWidth: 2, borderTopColor: colors.text.primary },
     margin: {
       borderLeftWidth: 3,

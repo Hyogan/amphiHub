@@ -274,8 +274,86 @@
       "rejectBody": "The contributor will see your reason. Be clear and kind.",
       "publishTitle": "Publish anyway?",
       "publishBody": "This file matches another document. Explain why it should still be published.",
+      "restrictTitle": "Restrict this document",
+      "restrictBody": "Students lose access at once. You can restore it later. Say why.",
+      "removeTitle": "Remove this document",
+      "removeBody": "Removal is final. Say why. You will be asked to confirm.",
+      "continue": "Continue",
       "placeholder": "Reason",
       "tooShort": "Write a reason (at least 3 characters)."
+    },
+    "tabRestricted": "Restricted",
+    "tabReports": "Reports",
+    "tabSuggestions": "Suggestions",
+    "moderateThis": "Moderate this document",
+    "restrict": "Restrict",
+    "restore": "Restore",
+    "remove": "Remove",
+    "restricted": "Restricted. Students can no longer open it.",
+    "restored": "Restored. It’s visible again.",
+    "removed": "Removed.",
+    "errorForbidden": "You’re not allowed to do this. Moderators can’t approve their own submissions.",
+    "openDocument": "Open the document",
+    "openOnResource_one": "{{count}} open report on this document",
+    "openOnResource_other": "{{count}} open reports on this document",
+    "resolve": "Resolve",
+    "dismiss": "Dismiss",
+    "reportResolved": "Report resolved.",
+    "reportDismissed": "Report dismissed.",
+    "reportsEmptyTitle": "No open reports",
+    "reportsEmptyBody": "Reports from students appear here.",
+    "reportsLoadError": "Couldn’t load the reports.",
+    "suggestionsEmptyTitle": "No pending suggestions",
+    "suggestionsEmptyBody": "Missing courses suggested by students appear here.",
+    "suggestionsLoadError": "Couldn’t load the suggestions.",
+    "suggestionAccepted": "Course added to the catalogue.",
+    "suggestionRejected": "Suggestion rejected.",
+    "suggestionKind": {
+      "course": "Course",
+      "program": "Program",
+      "unit": "Faculty or unit"
+    },
+    "suggestionSheet": {
+      "title": "Course suggestion",
+      "accept": "Add to the catalogue",
+      "reject": "Reject",
+      "studioOnly": "Only course suggestions can be accepted here. Add this one in Supabase Studio, then reject it."
+    },
+    "resolveSheet": {
+      "resolveTitle": "Resolve this report",
+      "dismissTitle": "Dismiss this report",
+      "body": "Write what you did or why nothing needed to change. It is kept in the audit log.",
+      "placeholder": "Note"
+    },
+    "restoreDialog": {
+      "title": "Restore this document?",
+      "body": "“{{title}}” becomes visible to students again.",
+      "cancel": "Not yet",
+      "confirm": "Restore"
+    },
+    "removeDialog": {
+      "title": "Remove this document?",
+      "body": "“{{title}}” disappears for everyone. This can’t be undone.",
+      "cancel": "Keep it",
+      "confirm": "Remove"
+    },
+    "verification": {
+      "edit": "Edit verification labels",
+      "title": "Verification labels",
+      "caution": "These labels describe the document’s details and source. They never mean its answers are correct.",
+      "metadata": "Details checked (course, year, type)",
+      "source": "Source",
+      "sourceStatus": {
+        "unverified": "Not verified",
+        "confirmed": "Source confirmed",
+        "official_confirmed": "Official source"
+      },
+      "noteLabel": "Evidence note",
+      "noteHelp": "Required for an official source. Say how you checked it.",
+      "noteMissing": "Write how you checked the source.",
+      "correction": "Correction reviewed",
+      "save": "Save labels",
+      "saved": "Labels updated."
     }
   }
 }
